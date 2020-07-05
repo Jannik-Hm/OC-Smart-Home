@@ -4,7 +4,7 @@
 [Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs)
 
 ### Tips and Tricks
-If u want them to autostart after you turned on the computer, you have to edit the profile.lua file in the etc directory.
+If u want the program to autostart after you turned on the computer, you have to edit the profile.lua file in the etc directory.
 To edit the file while you are in the home directory type:
 > edit /etc/profile.lua <br> 
 <br>
