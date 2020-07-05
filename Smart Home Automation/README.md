@@ -3,6 +3,7 @@
 [How to install](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#how-to-install) <br>
 [Tips and Tricks](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#tips-and-tricks) <br>
 [Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs) <br>
+[Problems?]
 <br>
 
 ### How to install
@@ -40,3 +41,8 @@ And add the line:
 - [ ] Finishing up the code
 - [x] Starting to program the code
 
+<br>
+
+### Problems?
+You have a problem? Go to the [Issues](https://github.com/Agent-Husky/OpenComputers/issues) section and take a look if somebody else has had the same problem before. <br>
+If you dont find anybody with the same issue, just [open a new one](https://github.com/Agent-Husky/OpenComputers/issues/new/choose).
