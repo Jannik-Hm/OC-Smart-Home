@@ -5,7 +5,7 @@
 [Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs)
 
 ### How to install
-If you want to install this program in your Minecraft world, make sure that you got OpenOs, an Internet Card, a Network Card and a Tier 3 Gpu installed. <br>
+If you want to install this program in your Minecraft world, make sure that you got OpenOS, an Internet Card, a Network Card and a Tier 3 Gpu installed. <br>
 Then paste the following commands: <br>
 
 Run this command on your server:
