@@ -1,6 +1,6 @@
 ## These are the Smart Home Automation Programs!
 [Tips and Tricks](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#tips-and-tricks)
-
+[Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs)
 
 ### Tips and Tricks
 If u want them to autostart then you have to edit the profile.lua file in the etc directory.
