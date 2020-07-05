@@ -14,6 +14,7 @@ Run this command on your server:
 
 And run this command on your Client (Tablet/Remote Console or Touchscreen PC's)
 > wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Screen" <br>
+<br>
 
 ### Tips and Tricks
 If u want the program to autostart after you turned on the computer, you have to edit the profile.lua file in the <i><b>etc</b></i> directory. <br>
