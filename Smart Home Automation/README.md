@@ -9,7 +9,7 @@ If you want to install this program in your Minecraft world, make sure that you 
 Then paste the following commands: <br>
 
 Run this command on your server:
-> wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Server.lua" <br> 
+> wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/ServerOS "/home/Smart Server.lua" <br> 
 <br>
 
 And run this command on your Client PC (Tablet/Remote Console or Touchscreen PC's):
