@@ -30,7 +30,7 @@ There delete the line:
 <br>
 
 And add the line:
->os.execute(path to your file f.e. "/home/Smart Server")
+>os.execute(path to your file f.e. "/home/Smart Server.lua")
 
 <br>
 
