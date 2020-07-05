@@ -9,11 +9,11 @@ If you want to install this program in your Minecraft world, make sure that you 
 Then paste the following commands: <br>
 
 Run this command on your server:
-> wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/ServerOS "/home/Smart Server.lua" <br> 
+> wget -f https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/ServerOS "/home/Smart Server.lua" <br> 
 <br>
 
 And run this command on your Client PC (Tablet/Remote Console or Touchscreen PC's):
-> wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Screen" <br>
+> wget -f https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Screen" <br>
 
 PS: Note that if you are using Tablets, the colors wont be as good as with the Remote Console connected and you will need to use Wireless Network Cards in your Tablets and your Servers.
 <br>
