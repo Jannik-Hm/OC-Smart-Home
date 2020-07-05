@@ -6,8 +6,13 @@
 
 ### How to install
 If you want to install this program in your Minecraft world, make sure that you got OpenOs, an Internet Card and a Network Card installed. <br>
-Then paste the command:
-> wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Server.lua"
+Then paste the following commands: <br>
+
+Run this command on your server:
+> wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Server.lua" <br> 
+<br>
+
+And run this command on your Client (Tablet/Remote Console or Touchscreen PC's)
 
 ### Tips and Tricks
 If u want the program to autostart after you turned on the computer, you have to edit the profile.lua file in the <i><b>etc</b></i> directory. <br>
