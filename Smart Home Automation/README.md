@@ -15,7 +15,7 @@ Run this command on your server:
 And run this command on your Client PC (Tablet/Remote Console or Touchscreen PC's):
 > wget -f https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Screen" <br>
 
-PS: Note that if you are using Tablets, the colors wont be as good as with the Remote Console (Tier 3 Tablets use Tier 2 Screens) connected and you will need to use Wireless Network Cards in your Tablets and your Servers.
+PS: Note that if you are using Tablets, the colors wont be as good as with the Remote Console (Tier 3 Tablets use Tier 2 Screens) connected to Servers and you will need to use Wireless Network Cards in your Tablets and your Main Server.
 <br>
 <br>
 
