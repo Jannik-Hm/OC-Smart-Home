@@ -5,15 +5,16 @@
 [Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs)
 
 ### How to install
-If you want to install this program in your Minecraft world, make sure that you got OpenOs, an Internet Card and a Network Card installed. <br>
+If you want to install this program in your Minecraft world, make sure that you got OpenOs, an Internet Card, a Network Card and a Tier 3 Gpu installed. <br>
 Then paste the following commands: <br>
 
 Run this command on your server:
 > wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Server.lua" <br> 
 <br>
 
-And run this command on your Client (Tablet/Remote Console or Touchscreen PC's)
+And run this command on your Client PC (Tablet/Remote Console or Touchscreen PC's):
 > wget https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/TabletOS "/home/Smart Screen" <br>
+PS: Note that if you are using Tablets, the colors wont be as good as with the Remote Console connected and you will need to use Wireless Network Cards in your Tablets and your Servers.
 <br>
 
 ### Tips and Tricks
