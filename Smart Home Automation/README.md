@@ -6,10 +6,12 @@
 ### Tips and Tricks
 If u want them to autostart after you turned on the computer, you have to edit the profile.lua file in the etc directory.
 To edit the file while you are in the home directory type:
-> edit /etc/profile.lua <br>
+> edit /etc/profile.lua <br> 
+<br>
 
 There delete the line:
 >dofile("/etc/motd") <br>
+<br>
 
 And add the line:
 >os.execute(path to your file f.e. "/home/Smart Server")
