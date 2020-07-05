@@ -17,6 +17,7 @@ And run this command on your Client PC (Tablet/Remote Console or Touchscreen PC'
 
 PS: Note that if you are using Tablets, the colors wont be as good as with the Remote Console connected and you will need to use Wireless Network Cards in your Tablets and your Servers.
 <br>
+<br>
 
 ### Tips and Tricks
 If u want the program to autostart after you turned on the computer, you have to edit the profile.lua file in the <i><b>etc</b></i> directory. <br>
