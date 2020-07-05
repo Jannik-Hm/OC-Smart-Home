@@ -6,6 +6,7 @@
 ### How to install
 If you want to install this program in your Minecraft world, make sure that you got OpenOs, an Internet Card and a Network Card installed.
 Then
+paste
 
 ### Tips and Tricks
 If u want the program to autostart after you turned on the computer, you have to edit the profile.lua file in the <i><b>etc</b></i> directory. <br>
