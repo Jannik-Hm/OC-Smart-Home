@@ -48,3 +48,4 @@ You have a problem? Go to the [Issues](https://github.com/Agent-Husky/OpenComput
 If you dont find anybody with the same issue, just [open a new one](https://github.com/Agent-Husky/OpenComputers/issues/new/choose).
 
 [![Program Showcase](https://i.ytimg.com/vi/8IycdrAkHE8/maxresdefault.jpg)](https://www.youtube.com/watch?v=8IycdrAkHE8&t)
+[![Program Showcase](https://i.ytimg.com/vi/8IycdrAkHE8/hqdefault.jpg)](https://www.youtube.com/watch?v=8IycdrAkHE8&t)
