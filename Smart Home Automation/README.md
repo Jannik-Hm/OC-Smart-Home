@@ -26,7 +26,6 @@ If u want the program to autostart after you turned on the computer, you have to
 To edit the file while you are in the home directory type:
 > edit /etc/profile.lua <br> 
 <br>
-Test
 
 There delete the line:
 >dofile("/etc/motd") <br>
