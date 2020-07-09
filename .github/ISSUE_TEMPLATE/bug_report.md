@@ -8,7 +8,7 @@ labels: bug
 **Bug description** <br>
 Describe the bug in a way that we can easily understand your issue
 
-**How can we Reproduce this Probelm?** <br>
+**How can we Reproduce this Problem?** <br>
 
 
 **What should happen instead of this bug?** <br>
