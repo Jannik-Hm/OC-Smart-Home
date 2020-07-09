@@ -1,10 +1,8 @@
 ---
 name: Bug report
 about: You found a bug? Tell us about so that we can try to fix it.
-title: ''
-labels: ''
-assignees: ''
-
+title: Describe your problem in a short sentence
+labels: bug
 ---
 
 **Describe the bug**
@@ -17,13 +15,14 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+**Expected behavior** <br>
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
+**Screenshots** <br>
 If applicable, add screenshots to help explain your problem.
 
-**Please tell us what Version of Opencomputers you are using.**
-
-**Additional context**
+**Additional context** <br>
 Add any other context about the problem here.
+
+**Version** <br>
+Please tell us what Version of Opencomputers you are using.
