@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: You found a bug? Tell us about so that we can try to fix it.
-title: Describe your problem in a short sentence
+title: ''
 labels: bug
 ---
 
