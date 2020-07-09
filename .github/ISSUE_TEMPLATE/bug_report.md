@@ -1,8 +1,8 @@
 ---
-Name: Bug report
-About: You found a bug? Tell us about so that we can try to fix it.
-Title: Describe your problem in a short sentence
-Labels: bug
+name: Bug report
+about: You found a bug? Tell us about so that we can try to fix it.
+title: Describe your problem in a short sentence
+labels: bug
 ---
 
 **Describe the bug**
