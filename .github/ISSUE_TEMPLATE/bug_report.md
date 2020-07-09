@@ -18,4 +18,4 @@ Describe the bug in a way that we can easily understand your issue
 You have got Screenshots that help you explain your problem better? Just add them here.
 
 **Version** <br>
-Please tell us what Version of Opencomputers you are using.
+Please tell us what Version of OpenComputers and Minecraft you are using.
