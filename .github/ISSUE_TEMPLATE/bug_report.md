@@ -1,7 +1,6 @@
 ---
 name: Bug report
 about: You found a bug? Tell us about so that we can try to fix it.
-title: ''
 labels: bug
 ---
 
