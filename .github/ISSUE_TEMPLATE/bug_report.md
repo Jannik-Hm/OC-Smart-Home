@@ -26,4 +26,4 @@ You have got Screenshots that help you explain your problem better? Just add the
 
 **Version** <br>
 Minecraft Verion: f.e. 1.12.2  <br>
-OpenComputers Version:  1.7.5.192  <br>
+OpenComputers Version: f.e. 1.7.5.192  <br>
