@@ -5,7 +5,7 @@ labels: bug
 ---
 
 **Prerequisites** <br>
-Please check the [Wiki](), and search existing [issues]() for similar questions before creating a new issue. <br>
+Please check the [Wiki](), and search existing [issues]() for similar questions before creating a new issue. If you havent found any similar problems, write an "x" between the "[ ]".<br>
 **YOU MAY DELETE THIS PREREQUISITES SECTION.**
 
 - [ ] I have checked the [FAQ](http://naver.github.io/pinpoint/faq.html), and [issues](https://github.com/naver/pinpoint/issues) and found no answer.
