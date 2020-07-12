@@ -25,4 +25,5 @@ Describe the bug in a way that we can easily understand your issue.
 You have got Screenshots that help you explain your problem better? Just add them here.
 
 **Version** <br>
-Please tell us what Version of OpenComputers and Minecraft you are using.
+Minecraft Verion: f.e. 1.12.2  <br>
+OpenComputers Version:  1.7.5.192  <br>
