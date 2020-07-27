@@ -7,10 +7,10 @@
 
 
 ### Languages
-Currently the following languages are supported by the program:
+Currently the following languages are supported by the program: <br>
 [German]() <br>
 [English]() <br>
-<br>
+
 #### You are missing your language?
 You can edit the buttons to display the lights and doors and the alarm in your language. <br>
 You can find a Tutorial on how to do this [here](). <br>
