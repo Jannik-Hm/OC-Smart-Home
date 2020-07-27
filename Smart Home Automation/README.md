@@ -12,7 +12,7 @@ Currently the following languages are supported by the program: <br>
 [English]() <br>
 
 #### You are missing your language?
-You can edit the buttons to display the lights and doors and the alarm in your language. <br>
+You can edit the buttons to display the texts in your language. <br>
 You can find a Tutorial on how to do this [here](). <br>
 You can even send me a pull request with your edited language to make it public to other people. <br>
 PS: I don't want any texts translated by Google. <br>
