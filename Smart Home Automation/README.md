@@ -21,7 +21,7 @@ PS: I don't want any texts translated by Google. <br>
 ### How to install
 If you want to install this program in your Minecraft world, make sure that you got OpenOS, an Internet Card, a Network Card and a Tier 3 Gpu installed. <br>
 Then run the installer by typing in the following command:
->wget -f https://raw.githubusercontent.com/ /home/installer.lua
+>pastebin run code
 
 PS: Note that if you are using Tablets, the colors wont be as good as with the Remote Console (Tier 3 Tablets use Tier 2 Screens) connected to Servers and you will need to use Wireless Network Cards in your Tablets and your Main Server.
 <br>
