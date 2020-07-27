@@ -1,5 +1,6 @@
 ![alt text](https://cdn.ttgtmedia.com/rms/onlineImages/iota-smart_home.jpg)
 ## These are the Smart Home Automation Programs!
+[Languages](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#languages) <br>
 [How to install](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#how-to-install) <br>
 [Tips and Tricks](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#tips-and-tricks) <br>
 [Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs) <br>
@@ -8,8 +9,8 @@
 
 ### Languages
 Currently the following languages are supported by the program: <br>
-[German]() <br>
-[English]() <br>
+[German](https://github.com/Agent-Husky/OpenComputers/tree/master/Smart%20Home%20Automation/Programs/Deutsch) <br>
+[English](https://github.com/Agent-Husky/OpenComputers/tree/master/Smart%20Home%20Automation/Programs/English) <br>
 
 #### You are missing your language?
 You can edit the buttons to display the texts in your language. <br>
