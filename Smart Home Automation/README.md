@@ -6,6 +6,17 @@
 [Problems?](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#problems) <br>
 
 
+### Languages
+Currently the following languages are supported by the program:
+[German]() <br>
+[English]() <br>
+<br>
+#### You are missing your language?
+You can edit the buttons to display the lights and doors and the alarm in your language. <br>
+You can find a Tutorial on how to do this [here](). <br>
+You can even send me a pull request with your edited language to make it public to other people. <br>
+PS: I don't want any texts translated by Google. <br>
+
 ### How to install
 If you want to install this program in your Minecraft world, make sure that you got OpenOS, an Internet Card, a Network Card and a Tier 3 Gpu installed. <br>
 Then run the installer by typing in the following command:
