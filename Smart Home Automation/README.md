@@ -16,7 +16,6 @@ Currently the following languages are supported by the program: <br>
 You can edit the buttons to display the texts in your language. <br>
 There is a Tutorial on how to do this [here](). <br>
 If you want, you can send me a pull request with your edited file to make it public to other people. <br>
-PS: I don't want any texts translated by Google. <br>
 
 ### How to install
 If you want to install this program in your Minecraft world, make sure that you got OpenOS, an Internet Card, a Network Card and a Tier 3 Gpu installed. <br>
