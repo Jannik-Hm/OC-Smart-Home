@@ -29,17 +29,7 @@ PS: Note that if you are using Tablets, the colors wont be as good as with the R
 <br>
 
 ### Tips and Tricks
-If u want the program to autostart after you turned on the computer, you have to edit the profile.lua file in the <i><b>etc</b></i> directory. <br>
-To edit the file while you are in the home directory type:
-> edit /etc/profile.lua <br> 
-<br>
 
-There delete the line:
->dofile("/etc/motd") <br>
-<br>
-
-And add the line:
->os.execute(path to your file f.e. "/home/Smart Server.lua")
 
 <br>
 
