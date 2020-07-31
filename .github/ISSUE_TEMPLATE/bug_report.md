@@ -4,7 +4,7 @@ about: You found a bug? Tell us about it, so that we can try to fix it.
 labels: bug
 ---
 
-**Prerequisites** <br>
+**Prerequisites**
 Please check the Wiki, and search existing issues for similar questions before creating a new issue. <br>
 If you havent found a guide on how to solve this problem, write an "x" between the "[ ]" like "[x]".<br>
 **YOU MAY DELETE THIS PREREQUISITES SECTION.**
