@@ -21,8 +21,8 @@ _Describe the bug in a way that we can easily understand your issue._
 2. …
 3. …
 
-#### ✔️ What should happen instead of this bug? 
-
+#### ✔️ Expected Result
+What should happen instead of this bug?
 
 #### 📷 Screenshots 
 _You have got Screenshots that help you explain your problem better? Just copy paste them here._
