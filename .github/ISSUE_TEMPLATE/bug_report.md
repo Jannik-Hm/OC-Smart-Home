@@ -6,10 +6,9 @@ labels: bug
 
 #### Prerequisites
 Please check the Wiki, and search existing issues for similar questions before creating a new issue.
-If you havent found a guide on how to solve this problem, write an "x" between the "[ ]" like "[x]".
-**YOU MAY DELETE THIS PREREQUISITES SECTION.**
+**Please delete this Section.**
 
-- [ ] I have checked the FAQ and issues and found no answer.
+✔️ I have checked the FAQ and issues and found no answer.
 
 
 #### 🐛 Bug description
