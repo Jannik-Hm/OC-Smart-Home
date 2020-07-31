@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: 🐛 Bug report
 about: You found a bug? Tell us about it, so that we can try to fix it.
 labels: bug
 ---
@@ -12,7 +12,7 @@ If you havent found a guide on how to solve this problem, write an "x" between t
 - [ ] I have checked the FAQ and issues and found no answer.
 
 
-#### Bug description
+#### 🐛 Bug description
 _Describe the bug in a way that we can easily understand your issue._
 
 #### 📝 How can we Reproduce this Problem?
