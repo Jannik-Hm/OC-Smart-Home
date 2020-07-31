@@ -5,7 +5,7 @@ labels: bug
 ---
 
 **Prerequisites** <br>
-Please check the [Wiki](), and search existing [issues]() for similar questions before creating a new issue. <br>
+Please check the Wiki, and search existing issues for similar questions before creating a new issue. <br>
 If you havent found a guide on how to solve this problem, write an "x" between the "[ ]" like "[x]".<br>
 **YOU MAY DELETE THIS PREREQUISITES SECTION.**
 
