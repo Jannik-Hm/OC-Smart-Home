@@ -13,7 +13,7 @@ If you havent found a guide on how to solve this problem, write an "x" between t
 
 
 **Bug description**
-_Describe the bug in a way that we can easily understand your issue.
+_Describe the bug in a way that we can easily understand your issue._
 
 **How can we Reproduce this Problem?**
 
