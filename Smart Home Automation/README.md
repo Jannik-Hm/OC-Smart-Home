@@ -29,7 +29,7 @@ PS: Note that if you are using Tablets, the colors wont be as good as with the R
 <br>
 
 ### Tips and Tricks
-
+You want to edit the texts the buttons display or add buttons? A tutorial on how to do it can be found [here]().
 
 <br>
 
