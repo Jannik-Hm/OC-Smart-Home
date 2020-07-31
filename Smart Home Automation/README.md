@@ -55,6 +55,6 @@ If you dont find anybody with the same issue, just [open a new one](https://gith
 <br>
 
 ### Updates
-You can read more about the changes of each Version [here]()
+You can read more about the changes of each Version [here](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/Changelog.md).
 
 [![Program Showcase](https://i.ytimg.com/vi/8IycdrAkHE8/maxresdefault.jpg)](https://www.youtube.com/watch?v=8IycdrAkHE8&t)
