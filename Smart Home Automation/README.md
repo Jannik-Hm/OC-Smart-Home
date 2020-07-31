@@ -5,6 +5,7 @@
 [Tips and Tricks](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#tips-and-tricks) <br>
 [Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs) <br>
 [Problems?](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#problems) <br>
+[Updates](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#updates)
 
 
 ### Languages
@@ -52,5 +53,8 @@ And add the line:
 You have a problem? Go to the [Issues](https://github.com/Agent-Husky/OpenComputers/issues) section and take a look if somebody else has had the same problem before. <br>
 If you dont find anybody with the same issue, just [open a new one](https://github.com/Agent-Husky/OpenComputers/issues/new/choose).
 <br>
+
+### Updates
+You can read more about the changes of each Version [here]()
 
 [![Program Showcase](https://i.ytimg.com/vi/8IycdrAkHE8/maxresdefault.jpg)](https://www.youtube.com/watch?v=8IycdrAkHE8&t)
