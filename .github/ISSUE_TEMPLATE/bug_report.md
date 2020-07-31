@@ -22,7 +22,7 @@ _Describe the bug in a way that we can easily understand your issue._
 3. …
 
 #### ✔️ Expected Result
-What should happen instead of this bug?
+_What should happen instead of this bug?_
 
 #### 📷 Screenshots 
 _You have got Screenshots that help you explain your problem better? Just copy paste them here._
