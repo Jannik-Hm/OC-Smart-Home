@@ -17,6 +17,9 @@ _Describe the bug in a way that we can easily understand your issue._
 
 #### 📝 How can we Reproduce this Problem?
 
+1. …
+2. …
+3. …
 
 #### ✔️ What should happen instead of this bug? 
 
