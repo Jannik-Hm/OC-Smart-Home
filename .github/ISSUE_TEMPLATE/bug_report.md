@@ -5,8 +5,8 @@ labels: bug
 ---
 
 **Prerequisites**
-Please check the Wiki, and search existing issues for similar questions before creating a new issue. <br>
-If you havent found a guide on how to solve this problem, write an "x" between the "[ ]" like "[x]".<br>
+Please check the Wiki, and search existing issues for similar questions before creating a new issue.
+If you havent found a guide on how to solve this problem, write an "x" between the "[ ]" like "[x]".
 **YOU MAY DELETE THIS PREREQUISITES SECTION.**
 
 - [ ] I have checked the FAQ and issues and found no answer.
