@@ -23,6 +23,7 @@ If you want to install this program in your Minecraft world, make sure that you 
 Then run the installer by typing in the following command:
 >pastebin run code
 
+<br>
 PS: Note that if you are using Tablets, the colors wont be as good as with the Remote Console (Tier 3 Tablets use Tier 2 Screens) connected to Servers and you will need to use Wireless Network Cards in your Tablets and your Main Server.
 <br>
 <br>
