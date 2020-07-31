@@ -21,9 +21,9 @@ Describe the bug in a way that we can easily understand your issue.
 **What should happen instead of this bug?** 
 
 
-**Screenshots**
+**Screenshots** 
 You have got Screenshots that help you explain your problem better? Just add them here.
 
-**Version**
+**Version** 
 Minecraft Version:  f.e. 1.12.2  <br>
 OpenComputers Version:  f.e. 1.7.5.192  <br>
