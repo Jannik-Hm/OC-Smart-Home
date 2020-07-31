@@ -23,6 +23,7 @@ _Describe the bug in a way that we can easily understand your issue._
 
 **Screenshots** 
 _You have got Screenshots that help you explain your problem better? Just add them here._
+![Screenshot](**Edit this link to your screenshot (You have to upload it somewhere)**)
 
 **Version** 
 Minecraft Version:  f.e. 1.12.2
