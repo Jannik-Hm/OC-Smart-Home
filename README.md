@@ -7,7 +7,7 @@
 [Problems?](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Problems%3F) <br>
 [Updates](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Changelog)
 
-<br>
+
 
 ### Fixes and Bugs
 - [ ] Finishing up this Readme file
