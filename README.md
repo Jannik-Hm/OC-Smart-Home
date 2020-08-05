@@ -8,7 +8,7 @@
 [Updates](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#updates)
 
 ### Tips and Tricks
-You want to edit the texts the buttons display or add buttons? A tutorial on how to do it can be found [here]().
+You want to edit the texts the buttons display or add buttons? A tutorial on how to do it can be found [here](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Edit-Buttons).
 
 <br>
 
