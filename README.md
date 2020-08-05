@@ -17,5 +17,4 @@ You want to edit the texts the buttons display or add buttons? A tutorial on how
 - [ ] Finishing up the code
 - [x] Starting to program the code
 
-<br>
 [![Program Showcase](https://i.ytimg.com/vi/8IycdrAkHE8/maxresdefault.jpg)](https://www.youtube.com/watch?v=8IycdrAkHE8&t)
