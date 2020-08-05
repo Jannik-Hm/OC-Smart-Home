@@ -1,11 +1,11 @@
 ![alt text](https://cdn.ttgtmedia.com/rms/onlineImages/iota-smart_home.jpg)
 ## These are the Smart Home Automation Programs!
-[Languages](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#languages) <br>
-[How to install](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#how-to-install) <br>
-[Tips and Tricks](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#tips-and-tricks) <br>
-[Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#fixes-and-bugs) <br>
-[Problems?](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#problems) <br>
-[Updates](https://github.com/Agent-Husky/OpenComputers/blob/master/Smart%20Home%20Automation/README.md#updates)
+[Languages](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Supported-languages) <br>
+[How to install](https://github.com/Agent-Husky/OC-Smart-Home/wiki/How-to-install) <br>
+[Tips and Tricks](https://github.com/Agent-Husky/OpenComputers/tree/publish-code/README.md#tips-and-tricks) <br>
+[Fixes and Bugs](https://github.com/Agent-Husky/OpenComputers/tree/publish-code/README.md#fixes-and-bugs) <br>
+[Problems?](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Problems%3F) <br>
+[Updates](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Changelog)
 
 ### Tips and Tricks
 You want to edit the texts the buttons display or add buttons? A tutorial on how to do it can be found [here](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Edit-Buttons).
