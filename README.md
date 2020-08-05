@@ -6,8 +6,3 @@
 [Fixes and Bugs](https://github.com/Agent-Husky/OC-Smart-Home#fixes-and-bugs) <br>
 [Problems?](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Problems%3F) <br>
 [Updates](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Changelog)
-
-### Fixes and Bugs
-- [ ] Finishing up this Readme file
-- [ ] Finishing up the code
-- [x] Starting to program the code
