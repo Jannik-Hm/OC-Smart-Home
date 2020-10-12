@@ -12,9 +12,9 @@ Please check the Wiki, and search existing issues for similar questions before c
 
 
 #### 🐛 Bug description
-_Describe the bug in a way that we can easily understand your issue._
+_Describe the bug in a way that I can easily understand your issue._
 
-#### 📝 How can we Reproduce this Problem?
+#### 📝 How can I Reproduce this Problem?
 
 1. …
 2. …
