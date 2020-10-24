@@ -1,5 +1,5 @@
 ## These are the Smart Home Automation Programs!
-[Supported languages](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Supported-languages) <br>
+[Wiki](https://github.com/Agent-Husky/OC-Smart-Home/wiki) <br>
 [How to install](https://github.com/Agent-Husky/OC-Smart-Home/wiki/How-to-install) <br>
 [Problems?](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Problems%3F) <br>
 [Versions](https://github.com/Agent-Husky/OC-Smart-Home/wiki/Changelog)
