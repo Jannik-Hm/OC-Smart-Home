@@ -36,13 +36,13 @@ function conf.setlights()
     button.setTable("Türen", "doors", 2, 29, 7, 52, Green)
     button.setTable("Alarmanlage", "alarm", 2, 55, 7, 78, Green)
 
-    lightbutton.setTable("Garage", "garage", 8, 4, 11, 17, "Das Licht in der Garage ist eingeschaltet!", "Das Licht in der Garage ist ausgeschaltet!", Green)
-    lightbutton.setTable("Küche", "kitchen", 8, 19, 11, 32, "Das Licht in der Küche ist eingeschaltet!", "Das Licht in der Küche ist ausgeschaltet!", Green)
-    lightbutton.setTable("Esszimmer", "dining room", 8, 34, 11, 48, "Das Licht im Esszimmer ist eingeschaltet!", "Das Licht im Esszimmer ist ausgeschaltet!", Green)
-    lightbutton.setTable("Bad unten", "bathroom down", 8, 50, 11, 63, "Das Licht im Bad unten ist eingeschaltet!", "Das Licht im Bad unten ist ausgeschaltet!", Green)
-    lightbutton.setTable("Büro", "office", 8, 65, 11, 77, "Das Licht im Büro ist eingeschaltet!", "Das Licht im Büro ist ausgeschaltet!", Green)
-    lightbutton.setTable("Bad oben", "bathroom up", 11, 22, 14, 39, "Das Licht im Bad oben ist eingeschaltet!", "Das Licht im Bad oben ist ausgeschaltet!", Green)
-    lightbutton.setTable("Kleiderschrank", "wardrobe", 11, 42, 14, 59, "Das Licht im Kleiderschrank ist eingeschaltet!", "Das Licht im Kleiderschrank ist ausgeschaltet!", Green)
+    lightbutton.setTable("Garage", "Garage", 8, 4, 11, 17, "Das Licht in der Garage ist eingeschaltet!", "Das Licht in der Garage ist ausgeschaltet!", Green)
+    lightbutton.setTable("Küche", "Küche", 8, 19, 11, 32, "Das Licht in der Küche ist eingeschaltet!", "Das Licht in der Küche ist ausgeschaltet!", Green)
+    lightbutton.setTable("Esszimmer", "Esszimmer", 8, 34, 11, 48, "Das Licht im Esszimmer ist eingeschaltet!", "Das Licht im Esszimmer ist ausgeschaltet!", Green)
+    lightbutton.setTable("Bad unten", "Bad unten", 8, 50, 11, 63, "Das Licht im Bad unten ist eingeschaltet!", "Das Licht im Bad unten ist ausgeschaltet!", Green)
+    lightbutton.setTable("Büro", "Büro", 8, 65, 11, 77, "Das Licht im Büro ist eingeschaltet!", "Das Licht im Büro ist ausgeschaltet!", Green)
+    lightbutton.setTable("Bad oben", "Bad oben", 11, 22, 14, 39, "Das Licht im Bad oben ist eingeschaltet!", "Das Licht im Bad oben ist ausgeschaltet!", Green)
+    lightbutton.setTable("Kleiderschrank", "Kleiderschrank", 11, 42, 14, 59, "Das Licht im Kleiderschrank ist eingeschaltet!", "Das Licht im Kleiderschrank ist ausgeschaltet!", Green)
     button.setTable("in allen ausschalten", "turn all off", 14, 29, 17, 52, Green)
 end
 
@@ -76,7 +76,7 @@ function conf.setdoors()
     button.draw(2, 29, 7, 52, "Türen", Red)
     button.setTable("Alarmanlage", "alarm", 2, 55, 7, 78, Green)
 
-    doorbutton.setTable("Haustür", "front door", 8, 15, 11, 38, "Die Haustür ist geöffnet!", "Die Haustür ist geschlossen!", Green)
+    doorbutton.setTable("Haustür", "Haustür", 8, 15, 11, 38, "Die Haustür ist geöffnet!", "Die Haustür ist geschlossen!", Green)
     doorbutton.setTable("Garagentor", "garage door", 8, 43, 11, 66, "Das Garagentor ist geöffnet!", "Das Garagentor ist geschlossen!", Green)
 end
 
