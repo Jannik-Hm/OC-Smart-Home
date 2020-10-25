@@ -1,6 +1,6 @@
 ---
 name: 📚 Documentation issue
-about: You found something wrong or missing in the Wiki? Tell us about it, so that we can correct/add it to the wiki.
+about: You found something wrong or missing in the Wiki? Tell us about it, so that we can correct/add it to the Wiki.
 labels: documentation
 ---
 
