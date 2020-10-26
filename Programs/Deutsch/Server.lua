@@ -32,17 +32,23 @@ local Alarmresetcolor = colors.lightblue
 
 -- Configuration of the lights and doors
 function conf.setlights()
-    light.setTable("Esszimmer", sides.front, colors.orange)
+    light.setTable("garage", sides.front, colors.yellow)
+    light.setTable("kitchen", sides.front, colors.white)
+    light.setTable("dining room", sides.front, colors.orange)
+    light.setTable("bathroom down", sides.front, colors.silver)
+    light.setTable("office", sides.front, colors.brown)
+    light.setTable("bathroom up", sides.front, colors.cyan)
+    light.setTable("wardrobe", sides.front, colors.black)
 end
 
 function conf.setdoors()
-    door.setTable("Haustür", sides.left, colors.lime, "1234")
+    door.setTable("front door", sides.left, colors.lime, "1234")
 end
 
 function conf.setlogmessage()
     Checkedservermessage = Sender .. "       hat sich mit dem Server verbunden"
     if Object ~= nil then
-        Checklightmessage = Sender .. "       hat den Status der Lampe " .. Object .. " abgefragt"
+        Checklightmessage = Sender .. "       hat den Status des Lichtes " .. Object .. " abgefragt"
         Turnalllightsoffmessage = Sender .. "       hat in allen Räumen das Licht eingeschaltet"
         Checkdoormessage = Sender .. "       hat den Status der Tür " .. Object .. " abgefragt"
         Checkgaragemessage = Sender .. "       hat den Status des Garagentores abgefragt"
@@ -50,12 +56,14 @@ function conf.setlogmessage()
         Checkalarmmessage = Sender .. "       hat den Status des Alarms abgefragt"
         Actiongaragewrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion beim Garagentor auszuführen"
         Actionalarmwrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion beim Alarm auszuführen"
-        if SAction ~= nil then
-            Actionlightmessage = Sender .. "       hat das Licht im Raum " .. Object .. " " .. SAction
-            Actiondoormessage = Sender .. "       hat die Tür " .. Object .. " " .. SAction
-            Actiongaragemessage = Sender .. "       hat das Garagentor " .. SAction
-            Actionalarmmessage = Sender .. "       hat den Alarm " .. SAction
-        end
+        Turnonlightmessage = Sender .. "       hat das Licht im Raum " .. Object .. " eingeschaltet"
+        Turnofflightmessage = Sender .. "       hat das Licht im Raum " .. Object .. " ausgeschaltet"
+        Opendoormessage = Sender .. "       hat die Tür " .. Object .. " geöffnet"
+        Closedoormessage = Sender .. "       hat die Tür " .. Object .. " geschlossen"
+        Opengaragemessage = Sender .. "       hat das Garagentor geöffnet"
+        Closegaragemessage = Sender .. "       hat das Garagentor geschlossen"
+        Disablealarmmessage = Sender .. "       hat den Alarm deaktiviert"
+        Resetalarmmessage = Sender .. "       hat den Alarm zurückgesetzt"
     end
 end
 
@@ -126,7 +134,6 @@ function light.check(room)
     if Currstate == 255 then State = "on" end
     if Currstate == 0 then State = "off" end
     modem.send(Sender, Port, State)
-    conf.setlogmessage()
     write.log(Checklightmessage)
 end
 
@@ -139,20 +146,16 @@ function light.action(room, action)
             Currstate = rs.getBundledOutput(data["side"], data["color"])
         end
     end
-    if action == "turn on" and Currstate == 255 then Check = "turned on" SAction = "eingeschaltet"
-    else if action == "turn off" and Currstate == 0 then Check = "turned off" SAction = "ausgeschaltet"
+    if action == "turn on" and Currstate == 255 then Check = "turned on" write.log(Turnonlightmessage)
+    else if action == "turn off" and Currstate == 0 then Check = "turned off" write.log(Turnofflightmessage)
     else Check = "failed" end end
     modem.send(Sender, Port, Check)
-    conf.setlogmessage()
-    write.log(Actionlightmessage)
-    SAction = nil
 end
 
 function light.turnalloff()
     for _, data in pairs(lights) do
         rs.setBundledOutput(data["side"], data["color"], 0)
     end
-    conf.setlogmessage()
     write.log(Turnalllightsoffmessage)
 end
 
@@ -169,7 +172,6 @@ function door.check(door)
         if Open == 255 and Close == 0 then State = "opened" end
         if Open == 0 and Close == 255 then State = "closed" end
         modem.send(Sender, Port, State)
-        conf.setlogmessage()
         write.log(Checkgaragemessage)
     else
         for _, data in pairs(doors) do
@@ -182,7 +184,6 @@ function door.check(door)
         if currstate == 255 then State = "closed" end
         if currstate == 0 then State = "opened" end
         modem.send(Sender, Port, State)
-        conf.setlogmessage()
         write.log(Checkdoormessage)
     end
 end
@@ -190,13 +191,10 @@ end
 function door.action(door, action, pass)
     if door == "garage door" then
         if pass == Garagepass then
-            if action == "open" then rs.setBundledOutput(Garagecloseside, Garageclosecolor, 0) rs.setBundledOutput(Garageopenside, Garageopencolor, 255) modem.send(Sender, Port, "correct", "was opened") SAction = "geöffnet" end
-            if action == "close" then rs.setBundledOutput(Garageopenside, Garageopencolor, 0) rs.setBundledOutput(Garagecloseside, Garageclosecolor, 255) modem.send(Sender, Port, "correct", "was closed") SAction = "geschlossen" end
-            conf.setlogmessage()
-            write.log(Actiongaragemessage)
+            if action == "open" then rs.setBundledOutput(Garagecloseside, Garageclosecolor, 0) rs.setBundledOutput(Garageopenside, Garageopencolor, 255) modem.send(Sender, Port, "correct", "was opened") write.log(Opengaragemessage) end
+            if action == "close" then rs.setBundledOutput(Garageopenside, Garageopencolor, 0) rs.setBundledOutput(Garagecloseside, Garageclosecolor, 255) modem.send(Sender, Port, "correct", "was closed") write.log(Closegaragemessage) end
         else
             modem.send(Sender, Port, "wrong")
-            conf.setlogmessage()
             write.log(Actiongaragewrongcodemessage)
         end
     else
@@ -214,19 +212,15 @@ function door.action(door, action, pass)
                 if action == "open" then Strength = 0 end
                 rs.setBundledOutput(Side, Color, Strength)
                 local currstate = rs.getBundledOutput(Side, Color)
-                if action == "close" and currstate == 255 then Check = "was closed" SAction = "geschlossen"
-                else if action == "open" and currstate == 0 then Check = "was opened" SAction = "geöffnet"
+                if action == "close" and currstate == 255 then Check = "was closed" write.log(Closedoormessage)
+                else if action == "open" and currstate == 0 then Check = "was opened" write.log(Opendoormessage)
                 else Check = "failed" end end
                 modem.send(Sender, Port, "correct", Check)
-                conf.setlogmessage()
-                write.log(Actiondoormessage)
             else modem.send(Sender, Port, "wrong")
-                conf.setlogmessage()
                 write.log(Actiondoorwrongcodemessage)
             end
         end
     end
-    SAction = nil
 end
 
 function alarm.check()
@@ -234,7 +228,6 @@ function alarm.check()
     if currstate >= 0 then State = "alarm triggered" end
     if currstate == 0 then State = "alarm not triggered" end
     modem.send(Sender, Port, State)
-    conf.setlogmessage()
     write.log(Checkalarmmessage)
 end
 
@@ -244,20 +237,16 @@ function alarm.action(action, pass)
         local currstate = rs.getBundledInput(Alarmside , Alarmcolor)
         if currstate >= 0 and action == "disable alarm" then
             rs.setBundledOutput(Alarmenableside, Alarmenablecolor, 0) rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 255)
-            if rs.getBundledInput(Alarmside, Alarmcolor) == 0 and rs.getBundledOutput(Alarmresetside, Alarmresetcolor) == 255 and rs.getBundledOutput(Alarmenableside, Alarmenablecolor) == 0 then modem.send(Sender, Port, "correct", "alarm disabled") SAction = "deaktiviert" end
+            if rs.getBundledInput(Alarmside, Alarmcolor) == 0 and rs.getBundledOutput(Alarmresetside, Alarmresetcolor) == 255 and rs.getBundledOutput(Alarmenableside, Alarmenablecolor) == 0 then modem.send(Sender, Port, "correct", "alarm disabled") write.log(Disablealarmmessage) end
         end
         if currstate >= 0 and action == "reset alarm" then
             rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 255) os.sleep(1) rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 0)
-            if rs.getBundledInput(Alarmside, Alarmcolor) == 0 then modem.send(Sender, Port, "correct", "alarm reset") SAction = "zurückgesetzt" end
+            if rs.getBundledInput(Alarmside, Alarmcolor) == 0 then modem.send(Sender, Port, "correct", "alarm reset") write.log(Resetalarmmessage) end
         end
-        conf.setlogmessage()
-        write.log(Actionalarmmessage)
     else
         modem.send(Sender, Port, "wrong")
-        conf.setlogmessage()
         write.log(Actionalarmwrongcodemessage)
     end
-    SAction = nil
 end
 
 while true do
@@ -274,7 +263,9 @@ while true do
     modem.open(Port)
     _, _, Sender, _, _, program, Object, action, pass = event.pull("modem_message")
 
-    if program == "check server" then modem.send(Sender, Port, "server ok") conf.setlogmessage() write.log(Checkedservermessage) end
+    conf.setlogmessage()
+
+    if program == "check server" then modem.send(Sender, Port, "server ok") write.log(Checkedservermessage) end
 
     if program == "light" then
         if action == nil and Object ~= "turn all off" then light.check(Object) end
