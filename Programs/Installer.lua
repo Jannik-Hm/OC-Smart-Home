@@ -1,1 +1,1 @@
-os.execute("wget -f (Link to edited Profile.lua) /etc/profile.lua")
+-- This is just a placeholder
