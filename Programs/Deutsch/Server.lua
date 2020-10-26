@@ -32,17 +32,17 @@ local Alarmresetcolor = colors.lightblue
 
 -- Configuration of the lights and doors
 function conf.setlights()
-    light.setTable("garage", sides.front, colors.yellow)
-    light.setTable("kitchen", sides.front, colors.white)
-    light.setTable("dining room", sides.front, colors.orange)
-    light.setTable("bathroom down", sides.front, colors.silver)
-    light.setTable("office", sides.front, colors.brown)
-    light.setTable("bathroom up", sides.front, colors.cyan)
-    light.setTable("wardrobe", sides.front, colors.black)
+    light.setTable("Garage", sides.front, colors.yellow)
+    light.setTable("Küche", sides.front, colors.white)
+    light.setTable("Esszimmer", sides.front, colors.orange)
+    light.setTable("Bad unten", sides.front, colors.silver)
+    light.setTable("Büro", sides.front, colors.brown)
+    light.setTable("Bad oben", sides.front, colors.cyan)
+    light.setTable("Kleiderschrank", sides.front, colors.black)
 end
 
 function conf.setdoors()
-    door.setTable("front door", sides.left, colors.lime, "1234")
+    door.setTable("Haustür", sides.left, colors.lime, "1234")
 end
 
 function conf.setlogmessage()
