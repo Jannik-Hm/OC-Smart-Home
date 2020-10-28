@@ -117,6 +117,8 @@ answer = string.upper(answer)
 
 gpu.set(2, Ydown2 + 2, "Thank you for using the Smart Home System made by Agent_Husky.")
 
+term.setCursor(1, Ydown2 + 4)
+
 if answer == "Y" then
     gpu.set(2, Ydown2 + 4, "Rebooting...")
     computer.shutdown(true)
