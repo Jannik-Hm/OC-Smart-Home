@@ -59,7 +59,7 @@ version.setTable("Codepad.lua", "3")
 
 gpu.setResolution(maxx, maxy)
 gpu.fill(1, 1, maxx, maxy, " ")
-draw.rectangle(1, 1, 5, maxx, "Welcome to the Smart Home Installer!")
+draw.rectangle(1, 1, 6, maxx, "Welcome to the Smart Home Installer!")
 
 gpu.set(2, yvers, "What Service do you want to install?")
 
@@ -70,8 +70,9 @@ gpu.set(2, yvers + 3, "3 for the Codepad")
 term.setCursor(2, yvers + 5)
 local answer = io.read()
 
-if answer ~= "3" then
+if answer == "3" then
     ydown = ylang
+    else
     gpu.set(2, ylang, "Which language do you want to use?")
         gpu.set(2, ylang + 1, "1 to choose the English language")
         gpu.set(2, ylang + 2, "2, um die deutsche Sprache auszuwählen")
@@ -87,11 +88,11 @@ for _, data in pairs(program) do
     if answer == data["number"] then
         if answer == "3" then
             gpu.set(2, ydown, "Downloading Codepad.lua...")
-            os.execute("wget -f -Q raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Codepad/Codepad.lua /bin/Codepad.lua")
+            os.execute("wget -f -Q https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Codepad/Codepad.lua /bin/Codepad.lua")
             gpu.set(2, ydown + 1, "Downloading Codepadconf.lua...")
-            os.execute("wget -f -Q raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Codepad/Codepadconf.lua /home/Codepadconf.lua")
+            os.execute("wget -f -Q https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Codepad/Codepadconf.lua /home/Codepadconf.lua")
             gpu.set(2, ydown + 2, "Downloading profile.lua...")
-            os.execute("wget -f -Q raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/codepadprofile.lua /etc/profile.lua")
+            os.execute("wget -f -Q https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/codepadprofile.lua /etc/profile.lua")
             gpu.set(2, ydown + 4, "Downloads finished")
             Ydown2 = ydown + 6
         else
