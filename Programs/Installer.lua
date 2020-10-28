@@ -53,8 +53,8 @@ function language.setTable(language, number, link)
     lang[language]["link"] = link
 end
 
-version.setTable("Server", "1", "Server.lua", "raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/serverprofile.lua", "Server.lua")
-version.setTable("Screen", "2", "Screen.lua", "raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/screenprofile.lua", "Screen.lua")
+version.setTable("Server", "1", "Server.lua", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/serverprofile.lua", "Server.lua")
+version.setTable("Screen", "2", "Screen.lua", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/screenprofile.lua", "Screen.lua")
 version.setTable("Codepad.lua", "3")
 
 gpu.setResolution(maxx, maxy)
