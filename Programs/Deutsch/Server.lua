@@ -13,6 +13,7 @@ local Serverrunningmessage = "Der Server läuft gerade" -- The message the serve
 
 -- Passcodes (the other ones for the doors are set via the setTable function)
 local Garagepass = "1234"
+local Maindoorpass = "1234"
 local Alarmpass = "1234"
 
 -- Garage Redstoneconfiguration
@@ -20,6 +21,10 @@ local Garageopenside = sides.left
 local Garageopencolor = colors.black
 local Garagecloseside = sides.left
 local Garageclosecolor = colors.yellow
+
+-- Maindoor Redstoneconfiguration
+local Maindoorside = sides.left
+local Maindoorcolor = colors.lime
 
 -- Alarm Redstoneconfiguration
 local Alarmside = sides.left
@@ -55,11 +60,14 @@ function conf.setlogmessage()
         Actiondoorwrongcodemessage = Sender .. "       hat den flaschen Code eingegeben, um eine Aktion bei der Tür " .. Object .. " auszuführen"
         Checkalarmmessage = Sender .. "       hat den Status des Alarms abgefragt"
         Actiongaragewrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion beim Garagentor auszuführen"
+        Actionmaindoorwrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion bei der Haustür auszuführen"
         Actionalarmwrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion beim Alarm auszuführen"
         Turnonlightmessage = Sender .. "       hat das Licht im Raum " .. Object .. " eingeschaltet"
         Turnofflightmessage = Sender .. "       hat das Licht im Raum " .. Object .. " ausgeschaltet"
         Opendoormessage = Sender .. "       hat die Tür " .. Object .. " geöffnet"
         Closedoormessage = Sender .. "       hat die Tür " .. Object .. " geschlossen"
+        Openmaindoormessage = Sender .. "       hat die Haustür geöffnet"
+        Closemaindoormessage = Sender .. "       hat die Haustür geschlossen"
         Opengaragemessage = Sender .. "       hat das Garagentor geöffnet"
         Closegaragemessage = Sender .. "       hat das Garagentor geschlossen"
         Disablealarmmessage = Sender .. "       hat den Alarm deaktiviert"
@@ -196,6 +204,14 @@ function door.action(door, action, pass)
         else
             modem.send(Sender, Port, "wrong")
             write.log(Actiongaragewrongcodemessage)
+        end
+    elseif door == "main door" then
+        if pass == Doorpass then
+            if action == "open" then rs.setBundledOutput(Maindoorside, Maindoorcolor, 0) modem.send(Sender, Port, "correct", "was opened") write.log(Openmaindoormessage) end
+            if action == "close" then rs.setBundledOutput(Maindoorside, Maindoorcolor, 255) modem.send(Sender, Port, "correct", "was closed") write.log(Closemaindoormessage) end
+        else 
+            modem.send(Sender, Port, "wrong")
+            write.log(Actionmaindoorwrongcodemessage)
         end
     else
         for _, data in pairs(doors) do
