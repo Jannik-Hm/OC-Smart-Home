@@ -119,7 +119,7 @@ gpu.set(2, Ydown2 + 2, "Thank you for using the Smart Home System made by Agent_
 
 term.setCursor(1, Ydown2 + 4)
 
-if answer == "Y" then
+if answer == "Y" or answer == "YES" then
     gpu.set(2, Ydown2 + 4, "Rebooting...")
     computer.shutdown(true)
 end
