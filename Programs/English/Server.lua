@@ -23,7 +23,7 @@ local Garageclosecolor = colors.yellow
 local Alarmside = sides.left
 local Alarmcolor = colors.red
 local Alarmenableside = sides.left
-local Alarmenablecolor = colors.lime
+local Alarmenablecolor = colors.orange
 local Alarmresetside = sides.left
 local Alarmresetcolor = colors.lightblue
 
