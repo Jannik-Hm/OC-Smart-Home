@@ -30,35 +30,35 @@ local Alarmresetcolor = colors.lightblue
 
 -- Configuration of the lights and doors
 function conf.setlights()
-    light.setTable("garage", sides.front, colors.yellow)
-    light.setTable("kitchen", sides.front, colors.white)
-    light.setTable("dining room", sides.front, colors.orange)
-    light.setTable("bathroom down", sides.front, colors.silver)
-    light.setTable("office", sides.front, colors.brown)
-    light.setTable("bathroom up", sides.front, colors.cyan)
-    light.setTable("wardrobe", sides.front, colors.black)
+    light.setTable("garage", "garage", sides.front, colors.yellow)
+    light.setTable("kitchen", "kitchen", sides.front, colors.white)
+    light.setTable("dining room", "dining room", sides.front, colors.orange)
+    light.setTable("bathroom down", "bathroom down", sides.front, colors.silver)
+    light.setTable("office", "office", sides.front, colors.brown)
+    light.setTable("bathroom up", "bathroom up", sides.front, colors.cyan)
+    light.setTable("wardrobe", "wardrobe", sides.front, colors.black)
 end
 
 function conf.setdoors()
-    door.setTable("front door", sides.left, colors.lime, "1234")
+    door.setTable("front door", "front door", sides.left, colors.lime, "1234")
 end
 
 function conf.setlogmessage()
     Checkedservermessage = Sender .. "       connected to this server"
     if Object ~= nil then
-        Checklightmessage = Sender .. "       has requested the state of the light " .. Object
+        Checklightmessage = Sender .. "       has requested the state of the light " .. Logname
         Turnalllightsoffmessage = Sender .. "       turned off the lights in every room"
-        Checkdoormessage = Sender .. "       requested the state of the door " .. Object
+        Checkdoormessage = Sender .. "       requested the state of the door " .. Logname
         Checkgaragemessage = Sender .. "       requested the state of the garage door"
-        Actiondoorwrongcodemessage = Sender .. "       gave the wrong code to perform action on the door " .. Object
+        Actiondoorwrongcodemessage = Sender .. "       gave the wrong code to perform action on the door " .. Logname
         Checkalarmmessage = Sender .. "       requested the state of the alarm"
         Actiongaragewrongcodemessage = Sender .. "       gave the wrong code to perform action on the garage door"
         Actionalarmwrongcodemessage = Sender .. "       gave a wrong code to perform action on the alarm"
-        Turnonlightmessage = Sender .. "       turned on the lights in " .. Object
-        Turnofflightmessage = Sender .. "       turned off the lights in " .. Object
+        Turnonlightmessage = Sender .. "       turned on the lights in " .. Logname
+        Turnofflightmessage = Sender .. "       turned off the lights in " .. Logname
         Lockhousemessage = Sender .. "       locked the house"
-        Opendoormessage = Sender .. "       opened the door " .. Object
-        Closedoormessage = Sender .. "       closed the door " .. Object
+        Opendoormessage = Sender .. "       opened the door " .. Logname
+        Closedoormessage = Sender .. "       closed the door " .. Logname
         Opengaragemessage = Sender .. "       opened the garage door"
         Closegaragemessage = Sender .. "       closed the garage door"
         Disablealarmmessage = Sender .. "       disabled the alarm"
@@ -116,9 +116,10 @@ function write.log(message)
     Log:close()
 end
 
-function light.setTable(room, side, color)
+function light.setTable(room, logname, side, color)
     lights[room] = {}
     lights[room]["room"] = room
+    lights[room]["logname"] = logname
     lights[room]["side"] = side
     lights[room]["color"] = color
 end
@@ -146,6 +147,7 @@ function light.action(room, action)
         if room == data["room"] then
             rs.setBundledOutput(data["side"], data["color"], Strength)
             Currstate = rs.getBundledOutput(data["side"], data["color"])
+            Logname = data["logname"]
         end
     end
     if action == "turn on" and Currstate == 255 then Check = "turned on" write.log(Turnonlightmessage)
@@ -161,9 +163,10 @@ function light.turnalloff()
     write.log(Turnalllightsoffmessage)
 end
 
-function door.setTable(name, side, color, pass)
+function door.setTable(name, logname, side, color, pass)
     doors[name] = {}
     doors[name]["name"] = name
+    doors[name]["logname"] = logname
     doors[name]["side"] = side
     doors[name]["color"] = color
     doors[name]["pass"] = pass
@@ -195,6 +198,7 @@ function door.lockhouse(pass)
         rs.setBundledOutput(Garageopenside, Garageopencolor, 0) rs.setBundledOutput(Garagecloseside, Garageclosecolor, 255)
         for _, data in pairs(doors) do
             rs.setBundledOutput(data["side"], data["color"], 255)
+            Logname = data["logname"]
         end
         rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 0) rs.setBundledOutput(Alarmenableside, Alarmenablecolor, 255)
         modem.send(Sender, Port, "correct")
