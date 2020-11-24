@@ -3,9 +3,6 @@ local colors = require("colors")
 local conf = {}
 local light = {}
 local door = {}
-local write = {}
-local lights = {}
-local doors = {}
 
 local Port = 4 -- The port on which the communication will happen, please use the same in all devices that you want to communicate with this server
 local Logfile = "/home/log.txt" -- The location where the Logfile will be stored
@@ -26,46 +23,51 @@ local Garageclosecolor = colors.yellow
 local Maindoorside = sides.left
 local Maindoorcolor = colors.lime
 
+-- Garage Redstoneconfiguration
+local Garageopenside = sides.left
+local Garageopencolor = colors.black
+local Garagecloseside = sides.left
+local Garageclosecolor = colors.yellow
+
 -- Alarm Redstoneconfiguration
 local Alarmside = sides.left
 local Alarmcolor = colors.red
 local Alarmenableside = sides.left
-local Alarmenablecolor = colors.lime
+local Alarmenablecolor = colors.orange
 local Alarmresetside = sides.left
 local Alarmresetcolor = colors.lightblue
 
-
 -- Configuration of the lights and doors
 function conf.setlights()
-    light.setTable("Garage", sides.front, colors.yellow)
-    light.setTable("Küche", sides.front, colors.white)
-    light.setTable("Esszimmer", sides.front, colors.orange)
-    light.setTable("Bad unten", sides.front, colors.silver)
-    light.setTable("Büro", sides.front, colors.brown)
-    light.setTable("Bad oben", sides.front, colors.cyan)
-    light.setTable("Kleiderschrank", sides.front, colors.black)
+    light.setTable("garage", "Garage", sides.front, colors.yellow)
+    light.setTable("kitchen", "Küche", sides.front, colors.white)
+    light.setTable("dining room", "Esszimmer", sides.front, colors.orange)
+    light.setTable("bathroom down", "Bad unten", sides.front, colors.silver)
+    light.setTable("office", "Büro", sides.front, colors.brown)
+    light.setTable("bathroom up", "Bad oben", sides.front, colors.cyan)
+    light.setTable("wardrobe", "Kleiderschrank", sides.front, colors.black)
 end
 
 function conf.setdoors()
-    door.setTable("Haustür", sides.left, colors.lime, "1234")
+    door.setTable("front door", "Haustür", sides.left, colors.lime, "1234")
 end
 
 function conf.setlogmessage()
     Checkedservermessage = Sender .. "       hat sich mit dem Server verbunden"
     if Object ~= nil then
-        Checklightmessage = Sender .. "       hat den Status des Lichtes " .. Object .. " abgefragt"
+        Checklightmessage = Sender .. "       hat den Status des Lichtes " .. Logname .. " abgefragt"
         Turnalllightsoffmessage = Sender .. "       hat in allen Räumen das Licht eingeschaltet"
-        Checkdoormessage = Sender .. "       hat den Status der Tür " .. Object .. " abgefragt"
+        Checkdoormessage = Sender .. "       hat den Status der Tür " .. Logname .. " abgefragt"
         Checkgaragemessage = Sender .. "       hat den Status des Garagentores abgefragt"
-        Actiondoorwrongcodemessage = Sender .. "       hat den flaschen Code eingegeben, um eine Aktion bei der Tür " .. Object .. " auszuführen"
+        Actiondoorwrongcodemessage = Sender .. "       hat den flaschen Code eingegeben, um eine Aktion bei der Tür " .. Logname .. " auszuführen"
         Checkalarmmessage = Sender .. "       hat den Status des Alarms abgefragt"
         Actiongaragewrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion beim Garagentor auszuführen"
         Actionmaindoorwrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion bei der Haustür auszuführen"
         Actionalarmwrongcodemessage = Sender .. "       hat den falschen Code eingegeben, um eine Aktion beim Alarm auszuführen"
-        Turnonlightmessage = Sender .. "       hat das Licht im Raum " .. Object .. " eingeschaltet"
-        Turnofflightmessage = Sender .. "       hat das Licht im Raum " .. Object .. " ausgeschaltet"
-        Opendoormessage = Sender .. "       hat die Tür " .. Object .. " geöffnet"
-        Closedoormessage = Sender .. "       hat die Tür " .. Object .. " geschlossen"
+        Turnonlightmessage = Sender .. "       hat das Licht im Raum " .. Logname .. " eingeschaltet"
+        Turnofflightmessage = Sender .. "       hat das Licht im Raum " .. Logname .. " ausgeschaltet"
+        Opendoormessage = Sender .. "       hat die Tür " .. Logname .. " geöffnet"
+        Closedoormessage = Sender .. "       hat die Tür " .. Logname .. " geschlossen"
         Openmaindoormessage = Sender .. "       hat die Haustür geöffnet"
         Closemaindoormessage = Sender .. "       hat die Haustür geschlossen"
         Opengaragemessage = Sender .. "       hat das Garagentor geöffnet"
@@ -84,6 +86,9 @@ local event = require("event")
 local filesystem = require("filesystem")
 local unicode = require("unicode")
 local sign = {}
+local write = {}
+local lights = {}
+local doors = {}
 
 gpu.setResolution(160, 50)
 term.clear()
@@ -122,9 +127,10 @@ function write.log(message)
     Log:close()
 end
 
-function light.setTable(room, side, color)
+function light.setTable(room, logname, side, color)
     lights[room] = {}
     lights[room]["room"] = room
+    lights[room]["logname"] = logname
     lights[room]["side"] = side
     lights[room]["color"] = color
 end
@@ -167,9 +173,10 @@ function light.turnalloff()
     write.log(Turnalllightsoffmessage)
 end
 
-function door.setTable(name, side, color, pass)
+function door.setTable(name, logname, side, color, pass)
     doors[name] = {}
     doors[name]["name"] = name
+    doors[name]["logname"] = logname
     doors[name]["side"] = side
     doors[name]["color"] = color
     doors[name]["pass"] = pass
@@ -189,29 +196,34 @@ function door.check(door)
             end
         end
         local currstate = rs.getBundledOutput(Side, Color)
-        if currstate == 255 then State = "closed" end
-        if currstate == 0 then State = "opened" end
+        if currstate == 0 then State = "closed" end
+        if currstate == 255 then State = "opened" end
         modem.send(Sender, Port, State)
         write.log(Checkdoormessage)
+    end
+end
+
+function door.lockhouse(pass)
+    if pass == Lockhousepass then
+        rs.setBundledOutput(Garageopenside, Garageopencolor, 0) rs.setBundledOutput(Garagecloseside, Garageclosecolor, 255)
+        for _, data in pairs(doors) do
+            rs.setBundledOutput(data["side"], data["color"], 0)
+        end
+        rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 0) rs.setBundledOutput(Alarmenableside, Alarmenablecolor, 255)
+        modem.send(Sender, Port, "correct")
+        write.log(Lockhousemessage)
+    else modem.send(Sender, Port, "wrong")
     end
 end
 
 function door.action(door, action, pass)
     if door == "garage door" then
         if pass == Garagepass then
-            if action == "open" then rs.setBundledOutput(Garagecloseside, Garageclosecolor, 0) rs.setBundledOutput(Garageopenside, Garageopencolor, 255) modem.send(Sender, Port, "correct", "was opened") write.log(Opengaragemessage) end
+            if action == "open" then rs.setBundledOutput(Garagecloseside, Garageclosecolor, 0) rs.setBundledOutput(Garageopenside, Garageopencolor, 255) modem.send(Sender, Port, "correct", "was opened") alarm.action("deactivate alarm", Alarmpass) write.log(Opengaragemessage) end
             if action == "close" then rs.setBundledOutput(Garageopenside, Garageopencolor, 0) rs.setBundledOutput(Garagecloseside, Garageclosecolor, 255) modem.send(Sender, Port, "correct", "was closed") write.log(Closegaragemessage) end
         else
             modem.send(Sender, Port, "wrong")
             write.log(Actiongaragewrongcodemessage)
-        end
-    elseif door == "main door" then
-        if pass == Doorpass then
-            if action == "open" then rs.setBundledOutput(Maindoorside, Maindoorcolor, 0) modem.send(Sender, Port, "correct", "was opened") write.log(Openmaindoormessage) end
-            if action == "close" then rs.setBundledOutput(Maindoorside, Maindoorcolor, 255) modem.send(Sender, Port, "correct", "was closed") write.log(Closemaindoormessage) end
-        else 
-            modem.send(Sender, Port, "wrong")
-            write.log(Actionmaindoorwrongcodemessage)
         end
     else
         for _, data in pairs(doors) do
@@ -224,13 +236,13 @@ function door.action(door, action, pass)
         if action == "no" then
         else
             if pass == Doorpass then
-                if action == "close" then Strength = 255 end
-                if action == "open" then Strength = 0 end
+                if action == "close" then Strength = 0 end
+                if action == "open" then Strength = 255 end
                 rs.setBundledOutput(Side, Color, Strength)
                 local currstate = rs.getBundledOutput(Side, Color)
-                if action == "close" and currstate == 255 then Check = "was closed" write.log(Closedoormessage)
-                else if action == "open" and currstate == 0 then Check = "was opened" write.log(Opendoormessage)
-                else Check = "failed" end end
+                if action == "close" and currstate == 0 then Check = "was closed" write.log(Closedoormessage)
+                elseif action == "open" and currstate == 255 then alarm.action("deactivate alarm", Alarmpass) Check = "was opened" write.log(Opendoormessage)
+                else Check = "failed" end
                 modem.send(Sender, Port, "correct", Check)
             else modem.send(Sender, Port, "wrong")
                 write.log(Actiondoorwrongcodemessage)
@@ -279,19 +291,32 @@ while true do
     modem.open(Port)
     _, _, Sender, _, _, program, Object, action, pass = event.pull("modem_message")
 
+    for _, data in pairs(lights) do
+        if Object == data["room"] then
+            Logname = data["logname"]
+        end
+    end
+
+    for _, data in pairs(doors) do
+        if Object == data["name"] then
+            Logname = data["logname"]
+        end
+    end
+
     conf.setlogmessage()
 
     if program == "check server" then modem.send(Sender, Port, "server ok") write.log(Checkedservermessage) end
 
     if program == "light" then
-        if action == nil and Object ~= "turn all off" then light.check(Object) end
-        if Object == "turn all off" then light.turnalloff() end
-        if action ~= nil and Object ~= "turn all off" then light.action(Object, action)
+        if action == nil and Object ~= "turn all off" then light.check(Object)
+        elseif Object == "turn all off" then light.turnalloff()
+        elseif action ~= nil and Object ~= "turn all off" then light.action(Object, action)
         end
     end
 
     if program == "door" then
-        if action == nil then door.check(Object)
+        if action == nil and Object ~= "lock house" then door.check(Object)
+        elseif Object == "lock house" then door.lockhouse(pass)
         else door.action(Object, action, pass)
         end
     end
