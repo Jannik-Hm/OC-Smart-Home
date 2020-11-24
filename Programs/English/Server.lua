@@ -147,7 +147,6 @@ function light.action(room, action)
         if room == data["room"] then
             rs.setBundledOutput(data["side"], data["color"], Strength)
             Currstate = rs.getBundledOutput(data["side"], data["color"])
-            Logname = data["logname"]
         end
     end
     if action == "turn on" and Currstate == 255 then Check = "turned on" write.log(Turnonlightmessage)
@@ -186,8 +185,8 @@ function door.check(door)
             end
         end
         local currstate = rs.getBundledOutput(Side, Color)
-        if currstate == 255 then State = "closed" end
-        if currstate == 0 then State = "opened" end
+        if currstate == 0 then State = "closed" end
+        if currstate == 255 then State = "opened" end
         modem.send(Sender, Port, State)
         write.log(Checkdoormessage)
     end
@@ -197,8 +196,7 @@ function door.lockhouse(pass)
     if pass == Lockhousepass then
         rs.setBundledOutput(Garageopenside, Garageopencolor, 0) rs.setBundledOutput(Garagecloseside, Garageclosecolor, 255)
         for _, data in pairs(doors) do
-            rs.setBundledOutput(data["side"], data["color"], 255)
-            Logname = data["logname"]
+            rs.setBundledOutput(data["side"], data["color"], 0)
         end
         rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 0) rs.setBundledOutput(Alarmenableside, Alarmenablecolor, 255)
         modem.send(Sender, Port, "correct")
@@ -227,12 +225,12 @@ function door.action(door, action, pass)
         if action == "no" then
         else
             if pass == Doorpass then
-                if action == "close" then Strength = 255 end
-                if action == "open" then Strength = 0 end
+                if action == "close" then Strength = 0 end
+                if action == "open" then Strength = 255 end
                 rs.setBundledOutput(Side, Color, Strength)
                 local currstate = rs.getBundledOutput(Side, Color)
-                if action == "close" and currstate == 255 then Check = "was closed" write.log(Closedoormessage)
-                elseif action == "open" and currstate == 0 then alarm.action("deactivate alarm", Alarmpass) Check = "was opened" write.log(Opendoormessage)
+                if action == "close" and currstate == 0 then Check = "was closed" write.log(Closedoormessage)
+                elseif action == "open" and currstate == 255 then alarm.action("deactivate alarm", Alarmpass) Check = "was opened" write.log(Opendoormessage)
                 else Check = "failed" end
                 modem.send(Sender, Port, "correct", Check)
             else modem.send(Sender, Port, "wrong")
@@ -281,6 +279,18 @@ while true do
 
     modem.open(Port)
     _, _, Sender, _, _, program, Object, action, pass = event.pull("modem_message")
+
+    for _, data in pairs(lights) do
+        if Object == data["room"] then
+            Logname = data["logname"]
+        end
+    end
+
+    for _, data in pairs(doors) do
+        if Object == data["name"] then
+            Logname = data["logname"]
+        end
+    end
 
     conf.setlogmessage()
 
