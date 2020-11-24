@@ -27,7 +27,6 @@ local Alarmenablecolor = colors.orange
 local Alarmresetside = sides.left
 local Alarmresetcolor = colors.lightblue
 
-
 -- Configuration of the lights and doors
 function conf.setlights()
     light.setTable("garage", "garage", sides.front, colors.yellow)
