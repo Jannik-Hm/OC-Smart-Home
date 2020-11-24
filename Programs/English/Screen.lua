@@ -82,17 +82,17 @@ end
 
 function conf.statedoors(state)
     if state == "opened" then
-        button.draw(11, 20, 14, 60, Sos, Red, "Do you want to close the door?")
-        button.setTable("Yes", "close", 15, 22, 18, 39, Green)
+        button.draw(14, 20, 17, 60, Sos, Red, "Do you want to close the door?")
+        button.setTable("Yes", "close", 18, 22, 21, 39, Green)
     end
     if state == "closed" then
-        button.draw(11, 20, 14, 60, Scs, Green, "Do you want to open the door?")
-        button.setTable("Yes", "open", 15, 22, 18, 39, Green)
+        button.draw(14, 20, 17, 60, Scs, Green, "Do you want to open the door?")
+        button.setTable("Yes", "open", 18, 22, 21, 39, Green)
     end
-    button.setTable("No", "no", 15, 42, 18, 59, Green)
+    button.setTable("No", "no", 18, 42, 21, 59, Green)
     Touch()
     if Func == "no" then
-    else lock.doorcode(Func, 19, 34)
+    else lock.doorcode(Func, 22, 34)
     end
 end
 
