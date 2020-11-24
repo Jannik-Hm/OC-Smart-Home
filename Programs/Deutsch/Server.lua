@@ -9,19 +9,9 @@ local Logfile = "/home/log.txt" -- The location where the Logfile will be stored
 local Serverrunningmessage = "Der Server läuft gerade" -- The message the server will display while it is running
 
 -- Passcodes (the other ones for the doors are set via the setTable function)
+local Lockhousepass = "1234"
 local Garagepass = "1234"
-local Maindoorpass = "1234"
 local Alarmpass = "1234"
-
--- Garage Redstoneconfiguration
-local Garageopenside = sides.left
-local Garageopencolor = colors.black
-local Garagecloseside = sides.left
-local Garageclosecolor = colors.yellow
-
--- Maindoor Redstoneconfiguration
-local Maindoorside = sides.left
-local Maindoorcolor = colors.lime
 
 -- Garage Redstoneconfiguration
 local Garageopenside = sides.left
