@@ -16,7 +16,7 @@ local button2 = {}
 local lock = {}
 local code = {}
 
-gpu.setResolution(80, 35)
+gpu.setResolution(80, 40)
 
 Port = 4
 Green = 0x33DB00
@@ -127,6 +127,7 @@ function conf.checkalarm(check, miny)
 end
 
 ::checkserv::
+modem.open(Port)
 modem.broadcast(Port, "check server")
 local _, _, server, _, _, servok = event.pull("modem_message")
 if servok ~= "server ok" then goto checkserv end
@@ -225,7 +226,6 @@ function light()
     Touch()
     if Func == "doors" then door() end
     if Func == "alarm" then alarm() end
-    modem.open(Port)
     modem.send(server, Port, "light", Func)
     if Func == "turn all off" then
     else Room = Func
@@ -242,13 +242,26 @@ function door()
     button.clear()
     conf.setdoors()
     Touch()
-    if Func == "lights" then light() end
-    if Func == "alarm" then alarm() end
-    modem.open(Port)
-    modem.send(server, Port, "door", Func)
-    Doorname = Func
-    local _, _, _, _, _, status = event.pull("modem_message")
-    conf.statedoors(status)
+    if Func == "lights" then light()
+    elseif Func == "alarm" then alarm()
+    elseif Func == "lock house" then
+        lock.code(15, 34, Green)
+        modem.send(server, Port, "door", Func, nil, Pass)
+        local _, _, _, _, _, codecheck = event.pull("modem_message")
+        if codecheck == "correct" then
+            lock.codecheck(codecheck, 15, 34)
+            for _, data in pairs(button2) do
+                if Func == data["func"] then
+                    button.draw(28, 10, 31, 70, data["opensentence"], Green)
+                end
+            end
+        elseif codecheck == "wrong" then lock.codecheck(codecheck, 15, 34) end
+    else
+        modem.send(server, Port, "door", Func)
+        Doorname = Func
+        local _, _, _, _, _, status = event.pull("modem_message")
+        conf.statedoors(status)
+    end
 end
 
 function alarm()
