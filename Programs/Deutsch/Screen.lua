@@ -46,7 +46,7 @@ function conf.setlights()
     button.setTable("in allen ausschalten", "turn all off", 14, 29, 17, 52, Green)
 end
 
-function conf.statelights(state, reciever)
+function conf.statelights(state)
     if state == "on" then
         button.draw(18, 15, 21, 65, Stateonsentence, Green, "Möchten sie es ausschalten?")
         button.setTable("Ja", "turn off", 22, 22, 25, 39, Green)
@@ -56,14 +56,6 @@ function conf.statelights(state, reciever)
         button.setTable("Ja", "turn on", 22, 22, 25, 39, Green)
     end
     button.setTable("Nein", "no", 22, 42, 25, 59, Green)
-    Touch()
-    if Func == "doors" then door() end
-    if Func == "alarm" then alarm() end
-    if Func == "turn off" or Func == "turn on" then modem.send(reciever, Port, "light", Room, Func)
-        local _, _, _, _, _, check = event.pull("modem_message")
-        conf.lightscheck(check)
-    end
-    Func, state, Room = nil
 end
 
 function conf.lightscheck(check)
@@ -91,10 +83,6 @@ function conf.statedoors(state)
         button.setTable("Ja", "open", 18, 22, 21, 39, Green)
     end
     button.setTable("Nein", "no", 18, 42, 21, 59, Green)
-    Touch()
-    if Func == "no" then
-    else lock.doorcode(Func, 22, 34)
-    end
 end
 
 function conf.checkdooraction(check, miny)
@@ -117,8 +105,6 @@ function conf.statealarm(state)
         button.draw(7, 15, 12, 65, "Es wurde ein Alarm ausgelöst!", Red)
         button.setTable("Alarm zurücksetzen", "reset alarm", 12, 17, 15, 39, Green)
         button.setTable("Alarm deaktivieren", "disable alarm", 12, 41, 15, 63, Green)
-        Touch()
-        lock.alarmcode(Func, 15, 34)
     end
 end
 
@@ -231,7 +217,15 @@ function light()
     if Func == "turn all off" then
     else Room = Func
         _, _, _, _, _, State = event.pull("modem_message")
-        conf.statelights(State, server)
+        conf.statelights(State)
+        Touch()
+        if Func == "doors" then door() end
+        if Func == "alarm" then alarm() end
+        if Func == "turn off" or Func == "turn on" then modem.send(server, Port, "light", Room, Func)
+            local _, _, _, _, _, check = event.pull("modem_message")
+            conf.lightscheck(check)
+        end
+        Func, State, Room = nil
     end
 end
 
@@ -262,6 +256,10 @@ function door()
         Doorname = Func
         local _, _, _, _, _, status = event.pull("modem_message")
         conf.statedoors(status)
+        Touch()
+        if Func == "no" then
+        else lock.doorcode(Func, 22, 34)
+        end
     end
 end
 
@@ -273,6 +271,8 @@ function alarm()
     modem.broadcast(Port, "alarm")
     local _, _, _, _, _, status = event.pull("modem_message")
     conf.statealarm(status)
+    Touch()
+    lock.alarmcode(Func, 15, 34)
 end
 
 function lock.code(miny, minx, color)
