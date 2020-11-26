@@ -76,6 +76,7 @@ function conf.setdoors()
 
     doorbutton.setTable("Front Door", "front door", 8, 15, 11, 38, "The front door is open!", "The front door is closed!", Green)
     doorbutton.setTable("Garage door", "garage door", 8, 43, 11, 66, "The garage door is open!", "The garage door is closed!", Green)
+    doorbutton.setTable("Lock House", "lock house", 11, 29, 14, 52, "The House was locked and the alarm is activated", nil, Green)
 end
 
 function conf.statedoors(state)
