@@ -231,7 +231,7 @@ function door.action(door, action, pass)
                 rs.setBundledOutput(Side, Color, Strength)
                 local currstate = rs.getBundledOutput(Side, Color)
                 if action == "close" and currstate == 0 then Check = "was closed" write.log(Closedoormessage)
-                elseif action == "open" and currstate == 255 then alarm.action("deactivate alarm", Alarmpass) Check = "was opened" write.log(Opendoormessage)
+                elseif action == "open" and currstate == 255 then alarm.action("disable alarm", Alarmpass) Check = "was opened" write.log(Opendoormessage)
                 else Check = "failed" end
                 modem.send(Sender, Port, "correct", Check)
             else modem.send(Sender, Port, "wrong")
@@ -251,7 +251,7 @@ function door.code(door, pass)
     end
     if pass == Doorpass then
         local currstate = rs.getBundledOutput(Side, Color)
-        if currstate == 0 then rs.setBundledOutput(Side, Color, 255) write.log(Opendoormessage) alarm.action("deactivate alarm", Alarmpass)
+        if currstate == 0 then rs.setBundledOutput(Side, Color, 255) write.log(Opendoormessage) alarm.action("disable alarm", Alarmpass)
         elseif currstate == 255 then rs.setBundledOutput(Side, Color, 0) write.log(Closedoormessage) end
         modem.send(Sender, Port, "correct")
     else
