@@ -271,12 +271,11 @@ end
 function alarm.action(action, pass)
     if pass == Alarmpass then
         modem.send(Sender, Port, "correct")
-        local currstate = rs.getBundledInput(Alarmside , Alarmcolor)
-        if currstate >= 0 and action == "disable alarm" then
+        if action == "disable alarm" then
             rs.setBundledOutput(Alarmenableside, Alarmenablecolor, 0) rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 255)
             if rs.getBundledInput(Alarmside, Alarmcolor) == 0 and rs.getBundledOutput(Alarmresetside, Alarmresetcolor) == 255 and rs.getBundledOutput(Alarmenableside, Alarmenablecolor) == 0 then modem.send(Sender, Port, "correct", "alarm disabled") write.log(Disablealarmmessage) end
         end
-        if currstate >= 0 and action == "reset alarm" then
+        if action == "reset alarm" then
             rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 255) os.sleep(1) rs.setBundledOutput(Alarmresetside, Alarmresetcolor, 0)
             if rs.getBundledInput(Alarmside, Alarmcolor) == 0 then modem.send(Sender, Port, "correct", "alarm reset") write.log(Resetalarmmessage) end
         end
