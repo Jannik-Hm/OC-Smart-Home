@@ -98,7 +98,7 @@ function lock.Touch(minx, miny, door)
   if X == backx and Y == backy then gpu.set(minx + 7, miny + 1, " ") goto GetD3 end
   Pass = D1..D2..D3..D4
   modem.open(Port)
-  modem.broadcast(Port, "code", door, Pass)
+  modem.broadcast(Port, "code", door, nil, Pass)
   local _, _, _, _, _, check = event.pull("modem_message")
   gpu.setBackground(green)
   if check == "correct" then
