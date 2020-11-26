@@ -42,6 +42,8 @@ function conf.setdoors()
     door.setTable("front door", "front door", sides.left, colors.lime, "1234")
 end
 
+-- Configuration of the logmessages
+
 function conf.setlogmessage()
     Checkedservermessage = Sender .. "       connected to this server"
     if Object ~= nil then
@@ -64,6 +66,8 @@ function conf.setlogmessage()
         Resetalarmmessage = Sender .. "       reset the alarm"
     end
 end
+
+-- Program itself, Nothing to configure below
 
 local term = require("term")
 local component = require("component")
@@ -101,8 +105,6 @@ end
 
 sign.running(1, 1, 160, 5, Serverrunningmessage)
 term.setCursor(1, 6)
-
--- Functions for the program and the program itself
 
 function write.log(message)
     Log = io.open(Logfile, "a")

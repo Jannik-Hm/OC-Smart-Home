@@ -18,18 +18,22 @@ local code = {}
 
 gpu.setResolution(80, 40)
 
-Port = 4
+Port = 4 -- The port on which the communication will happen, please use the same in all devices that you want to communicate with this server
 Green = 0x33DB00
 Green2 = 0x33B600
 Red = 0xFF0000
 Black = 0x000000
 White = 0xFFFFFF
 
+-- Configuration of the top menu
+
 function conf.setmenu()
     button.setTable("Lights", "lights", 2, 3, 7, 26, Green)
     button.setTable("Doors", "doors",2, 29, 7, 52, Green)
     button.setTable("Alarm", "alarm", 2, 55, 7, 78, Green)
 end
+
+-- Configuration of the light buttons
 
 function conf.setlights()
     button.draw(2, 3, 7, 26, "Lights", Red)
@@ -63,6 +67,8 @@ function conf.lightscheck(check)
     if check == "turned off" then button.draw(25, 15, 28, 65, "The light was turned off!", Green) end
 end
 
+-- Configuration of the door buttons
+
 function conf.setdoors()
     button.setTable("Lights", "lights", 2, 3, 7, 26, Green)
     button.draw(2, 29, 7, 52, "Doors", Red)
@@ -89,6 +95,8 @@ function conf.checkdooraction(check, miny)
     if check == "was closed" then button.draw(miny + 13, 25, miny + 16, 55, "The door was closed!", Green) end
 end
 
+-- Configuration of the alarm buttons
+
 function conf.setalarm()
     button.setTable("Lights", "lights", 2, 3, 7, 26, Green)
     button.setTable("Doors", "doors",2, 29, 7, 52, Green)
@@ -111,6 +119,8 @@ function conf.checkalarm(check, miny)
     if check == "alarm disabled" then button.draw(miny + 13, 20, miny + 16, 60, "The alarm was disabled!", Green) end
     if check == "alarm reset" then button.draw(miny + 13, 20, miny + 16, 60, "The Alarm was reset!", Green) end
 end
+
+-- Program itself, Nothing to configure below
 
 ::checkserv::
 modem.open(Port)
