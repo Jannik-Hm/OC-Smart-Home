@@ -312,7 +312,9 @@ while true do
         end
     end
 
-    if Logname ~= nil then conf.setlogmessage() end
+    if Logname == nil then Logname = "" end
+
+    conf.setlogmessage()
 
     if program == "check server" then modem.send(Sender, Port, "server ok") write.log(Checkedservermessage) end
 
