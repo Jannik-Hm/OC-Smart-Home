@@ -241,6 +241,25 @@ function door.action(door, action, pass)
     end
 end
 
+function door.code(door, pass)
+    for _, data in pairs(doors) do
+        if door == data["name"] then
+            Doorpass = data["pass"]
+            Side = data["side"]
+            Color = data["color"]
+        end
+    end
+    if pass == Doorpass then
+        local currstate = rs.getBundledOutput(Side, Color)
+        if currstate == 0 then rs.setBundledOutput(Side, Color, 255) write.log(Opendoormessage)
+        elseif currstate == 255 then rs.setBundledOutput(Side, Color, 0) write.log(Closedoormessage) end
+        modem.send(Sender, Port, "correct")
+    else
+        modem.send(Sender, Port, "wrong")
+        write.log(Actiondoorwrongcodemessage)
+    end
+end
+
 function alarm.check()
     local currstate = rs.getBundledInput(Alarmside, Alarmcolor)
     if currstate >= 0 then State = "alarm triggered" end
@@ -315,6 +334,10 @@ while true do
         if action == nil then alarm.check()
         else alarm.action(action, pass)
         end
+    end
+
+    if program == "code" then
+        door.code(Object, pass)
     end
 
     sign.running(1, 1, 160, 5, Serverrunningmessage)
