@@ -113,6 +113,8 @@ function conf.statealarm(state)
         button.draw(7, 15, 12, 65, "An alarm was triggered!", Red)
         button.setTable("Reset Alarm", "reset alarm", 12, 17, 15, 39, Green)
         button.setTable("Disable Alarm", "disable alarm", 12, 41, 15, 63, Green)
+        Touch()
+        lock.alarmcode(Func, 15, 34)
     end
 end
 
@@ -281,8 +283,6 @@ function alarm()
     modem.broadcast(Port, "alarm")
     local _, _, _, _, _, status = event.pull("modem_message")
     conf.statealarm(status)
-    Touch()
-    lock.alarmcode(Func, 15, 34)
 end
 
 function lock.code(miny, minx, color)
