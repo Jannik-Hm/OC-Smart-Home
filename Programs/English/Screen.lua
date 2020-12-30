@@ -24,6 +24,8 @@ Green2 = 0x33B600
 Red = 0xFF0000
 Black = 0x000000
 White = 0xFFFFFF
+Timeout = 10
+Timeoutcodepad = 10
 
 -- Configuration of the top menu
 
@@ -114,6 +116,9 @@ function conf.statealarm(state)
         button.setTable("Reset Alarm", "reset alarm", 12, 17, 15, 39, Green)
         button.setTable("Disable Alarm", "disable alarm", 12, 41, 15, 63, Green)
         Touch()
+        if Timeout2 then
+            return
+        end
         lock.alarmcode(Func, 15, 34)
     end
 end
@@ -124,6 +129,16 @@ function conf.checkalarm(check, miny)
 end
 
 -- Program itself, Nothing to configure below
+
+function Clear()
+    gpu.setBackground(Black)
+    local x, y = gpu.getResolution()
+    gpu.fill(1, 1, x, y, " ")
+    button.clear()
+end
+
+Timeout = Timeout - 2
+Timeoutcodepad = Timeoutcodepad - 2
 
 ::checkserv::
 modem.open(Port)
@@ -200,58 +215,62 @@ function doorbutton.setTable(name, door, miny, minx, maxy, maxx, stateopensenten
     button2[name]["closesentence"] = stateclosesentence
 end
 
-function Touch()
-    local _, _, x, y, _, _ = event.pull("touch")
+function Touch(usecase)
+    if not usecase then
+        _, _, X, Y, _, _ = event.pull(Timeout, "touch")
+        if not X and not Y then
+            Timeout2 = true
+            return
+        else
+            Timeout2 = false
+        end
+    else
+        _, _, X, Y, _, _ = event.pull("touch")
+    end
     for _, data in pairs(button2) do
-        if y >= data["miny"] and  y <= data["maxy"] then
-        if x >= data["minx"] and x <= data["maxx"] then
-            button.draw(data["miny"], data["minx"], data["maxy"], data["maxx"], data["name"], Red)
-            Func = data["func"]
-            Stateonsentence = data["stateonsentence"]
-            Stateoffsentence = data["stateoffsentence"]
-            Sos = data["opensentence"]
-            Scs = data["closesentence"]
-            Action = data["action"]
+        if Y >= data["miny"] and  Y <= data["maxy"] then
+            if X >= data["minx"] and X <= data["maxx"] then
+                button.draw(data["miny"], data["minx"], data["maxy"], data["maxx"], data["name"], Red)
+                Func = data["func"]
+                Stateonsentence = data["stateonsentence"]
+                Stateoffsentence = data["stateoffsentence"]
+                Sos = data["opensentence"]
+                Scs = data["closesentence"]
+                Action = data["action"]
+            end
         end
     end
 end
-end
 
 function light()
-    gpu.setBackground(Black)
-    os.execute("cls")
-    button.clear()
+    Clear()
     conf.setlights()
     Touch()
-    if Func == "doors" then door() end
-    if Func == "alarm" then alarm() end
+    if Timeout2 then
+        return
+    end
     modem.send(server, Port, "light", Func)
     if Func == "turn all off" then
     else Room = Func
         _, _, _, _, _, State = event.pull("modem_message")
         conf.statelights(State)
         Touch()
-        if Func == "doors" then door() end
-        if Func == "alarm" then alarm() end
         if Func == "turn off" or Func == "turn on" then modem.send(server, Port, "light", Room, Func)
             local _, _, _, _, _, check = event.pull("modem_message")
             conf.lightscheck(check)
         end
-        Func, State, Room = nil
+        Func, State, Room = nil, nil, nil
     end
 end
 
 function door()
-    gpu.setBackground(Black)
-    X, Y = gpu.getResolution()
-    gpu.fill(1, 1, X, Y, " ")
-    X, Y = nil
-    button.clear()
+    Clear()
     conf.setdoors()
     Touch()
-    if Func == "lights" then light()
-    elseif Func == "alarm" then alarm()
-    elseif Func == "lock house" then
+    if Timeout2 then
+        return
+    end
+    if Func == "lock house" then
         lock.code(15, 34, Green)
         modem.send(server, Port, "door", Func, nil, Pass)
         local _, _, _, _, _, codecheck = event.pull("modem_message")
@@ -269,6 +288,9 @@ function door()
         local _, _, _, _, _, status = event.pull("modem_message")
         conf.statedoors(status)
         Touch()
+        if Timeout2 then
+            return
+        end
         if Func == "no" then
         else lock.doorcode(Func, 22, 34)
         end
@@ -276,9 +298,7 @@ function door()
 end
 
 function alarm()
-    gpu.setBackground(Black)
-    os.execute("cls")
-    button.clear()
+    Clear()
     conf.setalarm()
     modem.broadcast(Port, "alarm")
     local _, _, _, _, _, status = event.pull("modem_message")
@@ -327,7 +347,13 @@ end
 function lock.digit(x2, y2)
     while true do
         Num = nil
-        _, _, X, Y, _, _ = event.pull("touch")
+        _, _, X, Y, _, _ = event.pull(Timeoutcodepad, "touch")
+        if X == nil and Y == nil then
+            Timeout2 = true
+            return
+        else
+            Timeout2 = false
+        end
         gpu.setBackground(Green2)
         for _, data in pairs(code) do
             if X == data["x"] and Y == data["y"] then
@@ -348,17 +374,21 @@ end
 function lock.Touch(minx, miny)
     ::GetD1::
     lock.digit(minx+ 3, miny + 1)
+    if Timeout2 then return end
     D1 = Num
     gpu.set(Backx, Backy, unicode.char(0x2190))
     ::GetD2::
     lock.digit(minx + 5, miny + 1)
+    if Timeout2 then return end
     D2 = Num
     if X == Backx and Y == Backy then gpu.set(minx + 3, miny + 1, " ") goto GetD1 end
     ::GetD3::
     lock.digit(minx+ 7, miny + 1)
+    if Timeout2 then return end
     D3 = Num
     if X == Backx and Y == Backy then gpu.set(minx + 5, miny + 1, " ") goto GetD2 end
     lock.digit(minx+ 9, miny + 1)
+    if Timeout2 then return end
     D4 = Num
     if X == Backx and Y == Backy then gpu.set(minx + 7, miny + 1, " ") goto GetD3 end
     Pass = D1..D2..D3..D4
@@ -368,12 +398,13 @@ function lock.codecheck(check, miny, minx)
     if check == "correct" then gpu.setForeground(Green2) computer.beep(500) computer.beep(1000) end
     if check == "wrong" then gpu.setForeground(Red) computer.beep(200) computer.beep(100) end
     gpu.set(minx + 3, miny + 1, "* * * *")
-    Num, D1, D2, D3, D4, Pass = nil
+    Num, D1, D2, D3, D4, Pass = nil, nil, nil, nil, nil, nil
     gpu.setForeground(White)
 end
 
 function lock.doorcode(action, miny, minx)
     lock.code(miny, minx, Green)
+    if Timeout2 then return end
     modem.send(server, Port, "door", Doorname, action, Pass)
     local _, _, _, _, _, codecheck, check = event.pull("modem_message")
     if codecheck == "correct" then
@@ -385,6 +416,7 @@ end
 
 function lock.alarmcode(action, miny, minx)
     lock.code(miny, minx, Green)
+    if Timeout2 then return end
     modem.send(server, Port, "alarm", nil, action, Pass)
     local _, _, _, _, _, codecheck, check = event.pull("modem_message")
     if codecheck == "correct" then
@@ -399,9 +431,7 @@ function lock.alarmcode(action, miny, minx)
 end
 
 while true do
-    gpu.setBackground(Black)
-    os.execute("cls")
-    button.clear()
+    Clear()
     conf.setmenu()
     Touch()
     if Func == "lights" then
