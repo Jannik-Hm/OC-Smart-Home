@@ -52,13 +52,13 @@ function conf.setlights()
     button.setTable("Turn all off", "turn all off", 14, 29, 17, 52, Green)
 end
 
-function conf.statelights(state)
+function conf.statelights(state, room)
     if state == "on" then
-        button.draw(18, 15, 21, 65, Stateonsentence, Green, "Do you want to turn it off?")
+        button.draw(18, 15, 21, 65, button2[room]["stateonsentence"], Green, "Do you want to turn it off?")
         button.setTable("Yes", "turn off", 22, 22, 25, 39, Green)
     end
     if state == "off" then
-        button.draw(18, 15, 21, 65, Stateoffsentence, Red, "Do you want to turn it on?")
+        button.draw(18, 15, 21, 65, button2[room]["stateoffsentence"], Red, "Do you want to turn it on?")
         button.setTable("Yes", "turn on", 22, 22, 25, 39, Green)
     end
     button.setTable("No", "no", 22, 42, 25, 59, Green)
@@ -81,13 +81,13 @@ function conf.setdoors()
     doorbutton.setTable("Lock House", "lock house", 11, 29, 14, 52, "The House was locked and the alarm is activated", nil, Green)
 end
 
-function conf.statedoors(state)
+function conf.statedoors(state, door)
     if state == "opened" then
-        button.draw(14, 20, 17, 60, Sos, Red, "Do you want to close the door?")
+        button.draw(14, 20, 17, 60, button2[door]["opensentence"], Red, "Do you want to close the door?")
         button.setTable("Yes", "close", 18, 22, 21, 39, Green)
     end
     if state == "closed" then
-        button.draw(14, 20, 17, 60, Scs, Green, "Do you want to open the door?")
+        button.draw(14, 20, 17, 60, button2[door]["closesentence"], Green, "Do you want to open the door?")
         button.setTable("Yes", "open", 18, 22, 21, 39, Green)
     end
     button.setTable("No", "no", 18, 42, 21, 59, Green)
@@ -180,39 +180,39 @@ end
 
 function button.setTable(name, func, miny, minx, maxy, maxx, color)
     button.draw(miny, minx, maxy, maxx, name, color)
-    button2[name] = {}
-    button2[name]["name"] = name
-    button2[name]["func"] = func
-    button2[name]["miny"] = miny
-    button2[name]["minx"] = minx
-    button2[name]["maxy"] = maxy
-    button2[name]["maxx"] = maxx
+    button2[func] = {}
+    button2[func]["name"] = name
+    button2[func]["func"] = func
+    button2[func]["miny"] = miny
+    button2[func]["minx"] = minx
+    button2[func]["maxy"] = maxy
+    button2[func]["maxx"] = maxx
 end
 
 function lightbutton.setTable(name, func, miny, minx, maxy, maxx, stateonsentence, stateoffsentence, color)
     button.draw(miny, minx, maxy, maxx, name, color)
-    button2[name] = {}
-    button2[name]["name"] = name
-    button2[name]["func"] = func
-    button2[name]["miny"] = miny
-    button2[name]["minx"] = minx
-    button2[name]["maxy"] = maxy
-    button2[name]["maxx"] = maxx
-    button2[name]["stateonsentence"] = stateonsentence
-    button2[name]["stateoffsentence"] = stateoffsentence
+    button2[func] = {}
+    button2[func]["name"] = name
+    button2[func]["func"] = func
+    button2[func]["miny"] = miny
+    button2[func]["minx"] = minx
+    button2[func]["maxy"] = maxy
+    button2[func]["maxx"] = maxx
+    button2[func]["stateonsentence"] = stateonsentence
+    button2[func]["stateoffsentence"] = stateoffsentence
 end
 
 function doorbutton.setTable(name, door, miny, minx, maxy, maxx, stateopensentence, stateclosesentence, color)
     button.draw(miny, minx, maxy, maxx, name, color)
-    button2[name] = {}
-    button2[name]["name"] = name
-    button2[name]["func"] = door
-    button2[name]["miny"] = miny
-    button2[name]["minx"] = minx
-    button2[name]["maxy"] = maxy
-    button2[name]["maxx"] = maxx
-    button2[name]["opensentence"] = stateopensentence
-    button2[name]["closesentence"] = stateclosesentence
+    button2[door] = {}
+    button2[door]["name"] = name
+    button2[door]["func"] = door
+    button2[door]["miny"] = miny
+    button2[door]["minx"] = minx
+    button2[door]["maxy"] = maxy
+    button2[door]["maxx"] = maxx
+    button2[door]["opensentence"] = stateopensentence
+    button2[door]["closesentence"] = stateclosesentence
 end
 
 function Touch(usecase)
@@ -232,11 +232,6 @@ function Touch(usecase)
             if X >= data["minx"] and X <= data["maxx"] then
                 button.draw(data["miny"], data["minx"], data["maxy"], data["maxx"], data["name"], Red)
                 Func = data["func"]
-                Stateonsentence = data["stateonsentence"]
-                Stateoffsentence = data["stateoffsentence"]
-                Sos = data["opensentence"]
-                Scs = data["closesentence"]
-                Action = data["action"]
             end
         end
     end
@@ -253,7 +248,7 @@ function light()
     if Func == "turn all off" then
     else Room = Func
         _, _, _, _, _, State = event.pull("modem_message")
-        conf.statelights(State)
+        conf.statelights(State, Room)
         Touch()
         if Func == "turn off" or Func == "turn on" then modem.send(server, Port, "light", Room, Func)
             local _, _, _, _, _, check = event.pull("modem_message")
@@ -286,7 +281,7 @@ function door()
         modem.send(server, Port, "door", Func)
         Doorname = Func
         local _, _, _, _, _, status = event.pull("modem_message")
-        conf.statedoors(status)
+        conf.statedoors(status, Doorname)
         Touch()
         if Timeout2 then
             return
@@ -407,11 +402,14 @@ function lock.doorcode(action, miny, minx)
     if Timeout2 then return end
     modem.send(server, Port, "door", Doorname, action, Pass)
     local _, _, _, _, _, codecheck, check = event.pull("modem_message")
+    lock.codecheck(codecheck, miny, minx)
     if codecheck == "correct" then
-        lock.codecheck(codecheck, miny, minx)
         conf.checkdooraction(check, miny)
     end
-    if codecheck == "wrong" then lock.codecheck(codecheck, miny, minx) os.sleep(1) lock.doorcode(action, miny, minx) end
+    if codecheck == "wrong" then 
+        os.sleep(1)
+        lock.doorcode(action, miny, minx) 
+    end
 end
 
 function lock.alarmcode(action, miny, minx)
@@ -419,12 +417,11 @@ function lock.alarmcode(action, miny, minx)
     if Timeout2 then return end
     modem.send(server, Port, "alarm", nil, action, Pass)
     local _, _, _, _, _, codecheck, check = event.pull("modem_message")
+    lock.codecheck(codecheck, miny, minx)
     if codecheck == "correct" then
-        lock.codecheck(codecheck, miny, minx)
         conf.checkalarm(check, miny)
     end
     if codecheck == "wrong" then
-        lock.codecheck(codecheck, miny, minx)
         os.sleep(1)
         lock.alarmcode(action, miny, minx)
     end
