@@ -220,6 +220,7 @@ function Touch(usecase)
         _, _, X, Y, _, _ = event.pull(Timeout, "touch")
         if not X and not Y then
             Timeout2 = true
+            Func = nil
             return
         else
             Timeout2 = false
