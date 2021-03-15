@@ -10,6 +10,7 @@ Timeout = 10
 Timeoutcodepad = 10
 
 Conf = {
+    ["Resolution"] = {80, 40},
     ["Port"] = 4,
     ["Green"] = 0x33DB00,
     ["Green2"] = 0x33B600,

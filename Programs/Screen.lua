@@ -18,7 +18,7 @@ local code = {}
 
 local pathtoconf = "/home/Screenconf.lua"
 
-gpu.setResolution(80, 40)
+gpu.setResolution(Conf.Resolution[1], Conf.Resolution[2])
 
 dofile(pathtoconf)
 
