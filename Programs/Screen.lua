@@ -104,20 +104,23 @@ end
 -- Configuration of the alarm buttons
 
 function conf.setalarm()
-    button.setTable("Lichter", "lights", 2, 3, 7, 26, Green)
-    button.setTable("Türen", "doors",2, 29, 7, 52, Green)
-    button.draw(2, 55, 7, 78, "Alarmanlage", Red)
+    button.draw(Conf.menu.alarm.miny, Conf.menu.alarm.minx, Conf.menu.alarm.maxy, Conf.menu.alarm.maxx, Conf.menu.alarm.name, Red)
+    for _, data in pairs(Conf.menu) do
+        if data.func == "alarm" then goto continue end
+        button.setTable(data.name, data.func, data.miny, data.minx, data.maxy, data.maxx, data.color)
+        ::continue::
+    end
 end
 
 function conf.statealarm(state)
     if state == "alarm not triggered" then
-        button.draw(7, 15, 12, 65, "Es wurde kein Alarm ausgelöst!", Green)
+        button.draw(7, 15, 12, 65, Conf.alarm.nottriggered.state, Green)
     end
 
     if state == "alarm triggered" then
-        button.draw(7, 15, 12, 65, "Es wurde ein Alarm ausgelöst!", Red)
-        button.setTable("Alarm zurücksetzen", "reset alarm", 12, 17, 15, 39, Green)
-        button.setTable("Alarm deaktivieren", "disable alarm", 12, 41, 15, 63, Green)
+        button.draw(7, 15, 12, 65, Conf.alarm.triggered.state, Red)
+        button.setTable(Conf.alarm.triggered.reset[1], Conf.alarm.triggered.reset[2], Conf.alarm.triggered.reset[3], Conf.alarm.triggered.reset[4], Conf.alarm.triggered.reset[5], Conf.alarm.triggered.reset[6], Conf.alarm.triggered.reset[7])
+        button.setTable(Conf.alarm.triggered.disable[1], Conf.alarm.triggered.disable[2], Conf.alarm.triggered.disable[3], Conf.alarm.triggered.disable[4], Conf.alarm.triggered.disable[5], Conf.alarm.triggered.disable[6], Conf.alarm.triggered.disable[7])
         Touch()
         if Timeout2 then
             return
@@ -127,8 +130,8 @@ function conf.statealarm(state)
 end
 
 function conf.checkalarm(check, miny)
-    if check == "alarm disabled" then button.draw(miny + 13, 20, miny + 16, 60, "Der Alarm wurde deaktiviert!", Green) end
-    if check == "alarm reset" then button.draw(miny + 13, 20, miny + 16, 60, "Der Alarm wurde zurückgesetzt!", Green) end
+    if check == "alarm disabled" then button.draw(miny + 13, 20, miny + 16, 60, Conf.alarm.triggered.disable[8], Green) end
+    if check == "alarm reset" then button.draw(miny + 13, 20, miny + 16, 60, Conf.alarm.triggered.reset[8], Green) end
 end
 
 -- Program itself, Nothing to configure below

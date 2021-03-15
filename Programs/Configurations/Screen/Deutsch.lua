@@ -78,11 +78,14 @@ Conf = {
     },
     ["alarm"] = {
         -- Alarm Configuration
-        [1] = {
-            -- not triggered
+        ["triggered"] = {
+            ["state"] = "Es wurde ein Alarm ausgelöst!"
         },
-        [2] = {
-            -- triggered
+        ["nottriggered"] = {
+            ["state"] = "Es wurde kein Alarm ausgelöst!",
+            -- {name, action, miny, minx, maxy, maxx, color, check}
+            ["reset"] = {"Alarm zurücksetzen", "reset alarm", 12, 17, 15, 39, Green, "Der Alarm wurde zurückgesetzt!"},
+            ["disable"] = {"Alarm deaktivieren", "disable alarm", 12, 41, 15, 63, Green, "Der Alarm wurde deaktiviert!"}
         }
     }
 }
