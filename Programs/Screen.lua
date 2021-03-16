@@ -18,9 +18,9 @@ local code = {}
 
 local pathtoconf = "/home/Screenconf.lua"
 
-gpu.setResolution(Conf.Resolution[1], Conf.Resolution[2])
-
 dofile(pathtoconf)
+
+gpu.setResolution(Conf.Resolution[1], Conf.Resolution[2])
 
 Timeout = Conf.Timeout
 Timeoutcodepad = Conf.Timeoutcodepad
