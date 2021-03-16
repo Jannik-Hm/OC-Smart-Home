@@ -1,22 +1,12 @@
--- TODO: Add last config, test it in terminal and edit Screen.lua
-
-Port = 4 -- The port on which the communication will happen, please use the same in all devices that you want to communicate with this server
 Green = 0x33DB00
 Green2 = 0x33B600
 Red = 0xFF0000
 Black = 0x000000
 White = 0xFFFFFF
-Timeout = 10
-Timeoutcodepad = 10
 
 Conf = {
     ["Resolution"] = {80, 40},
-    ["Port"] = 4,
-    ["Green"] = 0x33DB00,
-    ["Green2"] = 0x33B600,
-    ["Red"] = 0xFF0000,
-    ["Black"] = 0x000000,
-    ["White"] = 0xFFFFFF,
+    ["Port"] = 4, -- The port on which the communication will happen, please use the same in all devices that you want to communicate with this Client
     ["Timeout"] = 10,
     ["Timeoutcodepad"] = 10,
     ["yes"] = "Ja",

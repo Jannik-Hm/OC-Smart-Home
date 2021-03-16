@@ -22,6 +22,9 @@ gpu.setResolution(Conf.Resolution[1], Conf.Resolution[2])
 
 dofile(pathtoconf)
 
+Timeout = Conf.Timeout
+Timeoutcodepad = Conf.Timeoutcodepad
+
 -- Configuration of the top menu
 
 function conf.setmenu()
@@ -147,8 +150,8 @@ Timeout = Timeout - 2
 Timeoutcodepad = Timeoutcodepad - 2
 
 ::checkserv::
-modem.open(Port)
-modem.broadcast(Port, "check server")
+modem.open(Conf.Port)
+modem.broadcast(Conf.Port, "check server")
 local _, _, server, _, _, servok = event.pull("modem_message")
 if servok ~= "server ok" then goto checkserv end
 
@@ -251,13 +254,13 @@ function light()
     if Timeout2 then
         return
     end
-    modem.send(server, Port, "light", Func)
+    modem.send(server, Conf.Port, "light", Func)
     if Func == "turn all off" then
     else Room = Func
         _, _, _, _, _, State = event.pull("modem_message")
         conf.statelights(State, Room)
         Touch()
-        if Func == "turn off" or Func == "turn on" then modem.send(server, Port, "light", Room, Func)
+        if Func == "turn off" or Func == "turn on" then modem.send(server, Conf.Port, "light", Room, Func)
             local _, _, _, _, _, check = event.pull("modem_message")
             conf.lightscheck(check)
         end
@@ -274,7 +277,7 @@ function door()
     end
     if Func == "lock house" then
         lock.code(15, 34, Green)
-        modem.send(server, Port, "door", Func, nil, Pass)
+        modem.send(server, Conf.Port, "door", Func, nil, Pass)
         local _, _, _, _, _, codecheck = event.pull("modem_message")
         if codecheck == "correct" then
             lock.codecheck(codecheck, 15, 34)
@@ -285,7 +288,7 @@ function door()
             end
         elseif codecheck == "wrong" then lock.codecheck(codecheck, 15, 34) end
     else
-        modem.send(server, Port, "door", Func)
+        modem.send(server, Conf.Port, "door", Func)
         Doorname = Func
         local _, _, _, _, _, status = event.pull("modem_message")
         conf.statedoors(status, Doorname)
@@ -302,7 +305,7 @@ end
 function alarm()
     Clear()
     conf.setalarm()
-    modem.broadcast(Port, "alarm")
+    modem.broadcast(Conf.Port, "alarm")
     local _, _, _, _, _, status = event.pull("modem_message")
     conf.statealarm(status)
 end
@@ -407,7 +410,7 @@ end
 function lock.doorcode(action, miny, minx)
     lock.code(miny, minx, Green)
     if Timeout2 then return end
-    modem.send(server, Port, "door", Doorname, action, Pass)
+    modem.send(server, Conf.Port, "door", Doorname, action, Pass)
     local _, _, _, _, _, codecheck, check = event.pull("modem_message")
     lock.codecheck(codecheck, miny, minx)
     if codecheck == "correct" then
@@ -422,7 +425,7 @@ end
 function lock.alarmcode(action, miny, minx)
     lock.code(miny, minx, Green)
     if Timeout2 then return end
-    modem.send(server, Port, "alarm", nil, action, Pass)
+    modem.send(server, Conf.Port, "alarm", nil, action, Pass)
     local _, _, _, _, _, codecheck, check = event.pull("modem_message")
     lock.codecheck(codecheck, miny, minx)
     if codecheck == "correct" then
