@@ -83,7 +83,9 @@ function conf.setdoors()
     end
 
     for _, data in pairs(Conf.doors) do
-        doorbutton.setTable(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9])
+        if data[1] ~= nil then
+            doorbutton.setTable(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9])
+        end
     end
 end
 
