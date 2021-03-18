@@ -8,6 +8,12 @@ local pathtoconf = "/home/Serverconf.lua"
 
 dofile(pathtoconf)
 
+for _, data in pairs(Conf.Logmessages) do
+    if data[2] == nil then
+        data[2] = ""
+    end
+end
+
 -- Setup of the lights and doors
 
 function conf.setlights()
