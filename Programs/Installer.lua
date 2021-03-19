@@ -53,8 +53,8 @@ function language.setTable(language, number, link)
     lang[language]["link"] = link
 end
 
-version.setTable("Server", "1", "Server.lua", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/serverprofile.lua", "Server.lua")
-version.setTable("Screen", "2", "Screen.lua", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/screenprofile.lua", "Screen.lua")
+version.setTable("Server", "1", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Server.lua", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/serverprofile.lua", "Server.lua")
+version.setTable("Screen", "2", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Screen.lua", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Profiles/screenprofile.lua", "Screen.lua")
 version.setTable("Codepad.lua", "3")
 
 gpu.setResolution(maxx, maxy)
@@ -80,8 +80,8 @@ if answer == "3" then
         term.setCursor(2, ylang + 3)
         Langanswer = io.read()
 
-        language.setTable("english", "1", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/English/")
-        language.setTable("german", "2", "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Deutsch/")
+        language.setTable("english", "1", "English.lua")
+        language.setTable("german", "2", "Deutsch.lua")
 end
 
 for _, data in pairs(program) do
@@ -99,11 +99,13 @@ for _, data in pairs(program) do
             for _, data2 in pairs(lang) do
                 if Langanswer == data2["number"] then
                     gpu.set(2, ydown, "Downloading "..data["name"].."...")
-                    os.execute("wget -f -Q "..data2["link"]..data["link"].." /home/"..data["filename"])
-                    gpu.set(2, ydown + 1, "Downloading profile.lua...")
+                    os.execute("wget -f -Q "..data["link"].." /bin/"..data["filename"])
+                    gpu.set(2, ydown + 1, "Downloading Configuration")
+                    os.execute("wget -f -Q " .. "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Configurations/" .. data.name .. "/" .. data2["link"].. " /home/" .. data.name .. "conf.lua")
+                    gpu.set(2, ydown + 2, "Downloading profile.lua...")
                     os.execute("wget -f -Q "..data["autorunlink"].." /etc/profile.lua")
-                    gpu.set(2, ydown + 3, "Downloads finished")
-                    Ydown2 = ydown + 5
+                    gpu.set(2, ydown + 4, "Downloads finished")
+                    Ydown2 = ydown + 6
                 end
             end
         end
