@@ -100,7 +100,7 @@ for _, data in pairs(program) do
                 if Langanswer == data2["number"] then
                     gpu.set(2, ydown, "Downloading "..data["name"].."...")
                     os.execute("wget -f -Q "..data["link"].." /bin/"..data["filename"])
-                    gpu.set(2, ydown + 1, "Downloading Configuration")
+                    gpu.set(2, ydown + 1, "Downloading Configuration...")
                     os.execute("wget -f -Q " .. "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Configurations/" .. data.name .. "/" .. data2["link"].. " /home/" .. data.name .. "conf.lua")
                     gpu.set(2, ydown + 2, "Downloading profile.lua...")
                     os.execute("wget -f -Q "..data["autorunlink"].." /etc/profile.lua")
