@@ -43,4 +43,4 @@ if fs.exists(home_shrc) then
     loadfile(shell.resolve("source", "lua"))(home_shrc)
 end
 
-os.execute("/home/Screen.lua")
+os.execute("/bin/Screen.lua")

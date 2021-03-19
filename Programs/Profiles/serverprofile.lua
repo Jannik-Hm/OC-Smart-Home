@@ -43,4 +43,4 @@ if fs.exists(home_shrc) then
     loadfile(shell.resolve("source", "lua"))(home_shrc)
 end
 
-os.execute("/home/Server.lua")
+os.execute("/bin/Server.lua")
