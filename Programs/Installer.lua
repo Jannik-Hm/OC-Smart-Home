@@ -85,7 +85,7 @@ if answer == "3" then
 end
 
 for _, data in pairs(program) do
-    if answer == data["number"] then
+    if answer == data.number then
         if answer == "3" then
             gpu.set(2, ydown, "Downloading Codepad.lua...")
             os.execute("wget -f -Q https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Codepad/Codepad.lua /bin/Codepad.lua")
@@ -98,12 +98,12 @@ for _, data in pairs(program) do
         else
             for _, data2 in pairs(lang) do
                 if Langanswer == data2["number"] then
-                    gpu.set(2, ydown, "Downloading "..data["name"].."...")
-                    os.execute("wget -f -Q "..data["link"].." /bin/"..data["filename"])
+                    gpu.set(2, ydown, "Downloading "..data.name.."...")
+                    os.execute("wget -f -Q "..data.link.." /bin/"..data.filename)
                     gpu.set(2, ydown + 1, "Downloading Configuration...")
-                    os.execute("wget -f -Q " .. "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Configurations/" .. data.name .. "/" .. data2["link"].. " /home/" .. data.name .. "conf.lua")
+                    os.execute("wget -f -Q " .. "https://raw.githubusercontent.com/Agent-Husky/OC-Smart-Home/publish-code/Programs/Configurations/" .. data.name .. "/" .. data2.link.. " /home/" .. data.name .. "conf.lua")
                     gpu.set(2, ydown + 2, "Downloading profile.lua...")
-                    os.execute("wget -f -Q "..data["autorunlink"].." /etc/profile.lua")
+                    os.execute("wget -f -Q "..data.autorunlink.." /etc/profile.lua")
                     gpu.set(2, ydown + 4, "Downloads finished")
                     Ydown2 = ydown + 6
                 end
