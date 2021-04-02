@@ -36,6 +36,7 @@ end
 -- Configuration of the light buttons
 
 function conf.setlights()
+    Maxbuttony = 0
     button.draw(Conf.menu.lights.miny, Conf.menu.lights.minx, Conf.menu.lights.maxy, Conf.menu.lights.maxx, Conf.menu.lights.name, Red)
     button.draw(2, 3, 7, 26, "Lichter", Red)
     for _, data in pairs(Conf.menu) do
@@ -51,30 +52,32 @@ function conf.setlights()
             end
             goto continue end
         lightbutton.setTable(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9])
+        if data[5] > Maxbuttony then Maxbuttony = data[5] end
         ::continue::
     end
 end
 
 function conf.statelights(state, room)
     if state == "on" then
-        button.draw(18, 15, 21, 65, button2[room]["stateonsentence"], Green, Conf.lights.turnoffsentence)
-        button.setTable(Conf.yes, "turn off", 22, 22, 25, 39, Green)
+        button.draw(Maxbuttony+1, 15, Maxbuttony+4, 65, button2[room]["stateonsentence"], Green, Conf.lights.turnoffsentence)
+        button.setTable(Conf.yes, "turn off", Maxbuttony+5, 22, Maxbuttony+8, 39, Green)
     end
     if state == "off" then
-        button.draw(18, 15, 21, 65, button2[room]["stateoffsentence"], Red, Conf.lights.turnonsentence)
-        button.setTable(Conf.yes, "turn on", 22, 22, 25, 39, Green)
+        button.draw(Maxbuttony+1, 15, Maxbuttony+4, 65, button2[room]["stateoffsentence"], Red, Conf.lights.turnonsentence)
+        button.setTable(Conf.yes, "turn on", Maxbuttony+5, 22, Maxbuttony+8, 39, Green)
     end
-    button.setTable(Conf.no, "no", 22, 42, 25, 59, Green)
+    button.setTable(Conf.no, "no", Maxbuttony+5, 42, Maxbuttony+8, 59, Green)
 end
 
 function conf.lightscheck(check)
-    if check == "turned on" then button.draw(25, 15, 28, 65, Conf.lights.turnedonsentence, Green) end
-    if check == "turned off" then button.draw(25, 15, 28, 65, Conf.lights.turnedoffsentence, Green) end
+    if check == "turned on" then button.draw(Maxbuttony+8, 15, Maxbuttony+11, 65, Conf.lights.turnedonsentence, Green) end
+    if check == "turned off" then button.draw(Maxbuttony+8, 15, Maxbuttony+11, 65, Conf.lights.turnedoffsentence, Green) end
 end
 
 -- Configuration of the door buttons
 
 function conf.setdoors()
+    Maxbuttony = 0
     button.draw(Conf.menu.doors.miny, Conf.menu.doors.minx, Conf.menu.doors.maxy, Conf.menu.doors.maxx, Conf.menu.doors.name, Red)
     for _, data in pairs(Conf.menu) do
         if data.func == "doors" then goto continue end
@@ -85,20 +88,22 @@ function conf.setdoors()
     for _, data in pairs(Conf.doors) do
         if data[1] ~= nil then
             doorbutton.setTable(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9])
+            if data[5] > Maxbuttony then Maxbuttony = data[5] end
+            if data[2] == "lock house" then Lockhousemaxy = data[5] end
         end
     end
 end
 
 function conf.statedoors(state, door)
     if state == "opened" then
-        button.draw(14, 20, 17, 60, button2[door]["opensentence"], Red, Conf.doors.closesentence)
-        button.setTable(Conf.yes, "close", 18, 22, 21, 39, Green)
+        button.draw(Maxbuttony, 20, Maxbuttony+3, 60, button2[door]["opensentence"], Red, Conf.doors.closesentence)
+        button.setTable(Conf.yes, "close", Maxbuttony+4, 22, Maxbuttony+7, 39, Green)
     end
     if state == "closed" then
-        button.draw(14, 20, 17, 60, button2[door]["closesentence"], Green, Conf.doors.opensentence)
-        button.setTable(Conf.yes, "open", 18, 22, 21, 39, Green)
+        button.draw(Maxbuttony, 20, Maxbuttony+3, 60, button2[door]["closesentence"], Green, Conf.doors.opensentence)
+        button.setTable(Conf.yes, "open", Maxbuttony+4, 22, Maxbuttony+7, 39, Green)
     end
-    button.setTable(Conf.no, "no", 18, 42, 21, 59, Green)
+    button.setTable(Conf.no, "no", Maxbuttony+4, 42, Maxbuttony+7, 59, Green)
 end
 
 function conf.checkdooraction(check, miny)
@@ -118,6 +123,7 @@ function conf.setalarm()
 end
 
 function conf.statealarm(state)
+    Maxbuttony = 0
     if state == "alarm not triggered" then
         button.draw(7, 15, 12, 65, Conf.alarm.nottriggered.state, Green)
     end
@@ -126,11 +132,16 @@ function conf.statealarm(state)
         button.draw(7, 15, 12, 65, Conf.alarm.triggered.state, Red)
         button.setTable(Conf.alarm.triggered.reset[1], Conf.alarm.triggered.reset[2], Conf.alarm.triggered.reset[3], Conf.alarm.triggered.reset[4], Conf.alarm.triggered.reset[5], Conf.alarm.triggered.reset[6], Conf.alarm.triggered.reset[7])
         button.setTable(Conf.alarm.triggered.disable[1], Conf.alarm.triggered.disable[2], Conf.alarm.triggered.disable[3], Conf.alarm.triggered.disable[4], Conf.alarm.triggered.disable[5], Conf.alarm.triggered.disable[6], Conf.alarm.triggered.disable[7])
+        if Conf.alarm.triggered.reset[5] > Conf.alarm.triggered.disable[5] then
+            Maxbuttony = Conf.alarm.triggered.reset[5]
+        else
+            Maxbuttony = Conf.alarm.triggered.disable[5]
+        end
         Touch()
         if Timeout2 then
             return
         end
-        lock.alarmcode(Func, 15, 34)
+        lock.alarmcode(Func, Maxbuttony, 34)
     end
 end
 
@@ -278,17 +289,17 @@ function door()
         return
     end
     if Func == "lock house" then
-        lock.code(15, 34, Green)
+        lock.code(Lockhousemaxy+1, 34, Green)
         modem.send(server, Conf.Port, "door", Func, nil, Pass)
         local _, _, _, _, _, codecheck = event.pull("modem_message")
         if codecheck == "correct" then
-            lock.codecheck(codecheck, 15, 34)
+            lock.codecheck(codecheck, Lockhousemaxy+1, 34)
             for _, data in pairs(button2) do
                 if Func == data["func"] then
-                    button.draw(28, 10, 31, 70, data["opensentence"], Green)
+                    button.draw(Lockhousemaxy+14, 10, Lockhousemaxy+17, 70, data["opensentence"], Green)
                 end
             end
-        elseif codecheck == "wrong" then lock.codecheck(codecheck, 15, 34) end
+        elseif codecheck == "wrong" then lock.codecheck(codecheck, Lockhousemaxy+1, 34) end
     else
         modem.send(server, Conf.Port, "door", Func)
         Doorname = Func
@@ -299,7 +310,7 @@ function door()
             return
         end
         if Func == "no" then
-        else lock.doorcode(Func, 22, 34)
+        else lock.doorcode(Func, Maxbuttony+8, 34)
         end
     end
 end
