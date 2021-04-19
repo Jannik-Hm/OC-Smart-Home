@@ -239,7 +239,7 @@ end
 
 function Touch(usecase)
     if not usecase then
-        _, _, X, Y, _, _ = event.pull(Timeout, "touch")
+        Eventtype, _, X, Y, _, Message = event.pullMultiple(Timeout, "touch", "modem_message")
         if not X and not Y then
             Timeout2 = true
             Func = nil
@@ -248,13 +248,25 @@ function Touch(usecase)
             Timeout2 = false
         end
     else
-        _, _, X, Y, _, _ = event.pull("touch")
+        Eventtype, _, X, Y, _, Message = event.pullMultiple("touch", "modem_message")
     end
-    for _, data in pairs(button2) do
-        if Y >= data["miny"] and  Y <= data["maxy"] then
-            if X >= data["minx"] and X <= data["maxx"] then
-                button.draw(data["miny"], data["minx"], data["maxy"], data["maxx"], data["name"], Red)
-                Func = data["func"]
+    if Eventtype == "modem_message" then
+        local sender = X
+        if sender == server then
+            if Message == "alarm triggered" then
+                alarm.alarmmessage()
+            elseif Message == "alarm reset" and Lastmessage == "alarm triggered" then
+                alarm.alarmmessage("clear")
+            end
+        end
+        Lastmessage = Message
+    elseif Eventtype == "touch" then
+        for _, data in pairs(button2) do
+            if Y >= data["miny"] and  Y <= data["maxy"] then
+                if X >= data["minx"] and X <= data["maxx"] then
+                    button.draw(data["miny"], data["minx"], data["maxy"], data["maxx"], data["name"], Red)
+                    Func = data["func"]
+                end
             end
         end
     end
@@ -315,12 +327,29 @@ function door()
     end
 end
 
-function alarm()
+function alarm.alarm()
     Clear()
     conf.setalarm()
     modem.broadcast(Conf.Port, "alarm")
     local _, _, _, _, _, status = event.pull("modem_message")
     conf.statealarm(status)
+end
+
+function alarm.alarmmessage(addition)
+    if addition then goto getbutton end
+    gpu.setBackground(Black)
+    gpu.fill(1, 8, Conf.Resolution[1], Conf.Resolution[2], " ")
+    button.clear()
+    button.draw(8, Conf.Resolution[1]/4, 13, Conf.Resolution[1]/4*3, Conf.alarm.triggered.message, Red)
+    button.setTable("Ok", "alarmok", 14, Conf.Resolution[1]/2-5, 17, Conf.Resolution[1]/2+5, Green)
+    ::getbutton::
+    Touch("alarmmessage")
+    if (Eventtype == "touch" and Func == "alarmok") or (Eventtype == "modem_message" and Message "alarm reset") then
+        Timeout2 = true
+        return
+    else
+        goto getbutton
+    end
 end
 
 function lock.code(miny, minx, color)
@@ -452,16 +481,16 @@ end
 
 while true do
     Clear()
+    Program = nil
     conf.setmenu()
-    Touch()
+    Touch("menu")
+    Program = Func
     if Func == "lights" then
         light()
-    end
-    if Func == "doors" then
+    elseif Func == "doors" then
         door()
-    end
-    if Func == "alarm" then
-        alarm()
+    elseif Func == "alarm" then
+        alarm.alarm()
     end
     os.sleep(2)
 end

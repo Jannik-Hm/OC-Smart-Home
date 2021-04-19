@@ -7,8 +7,8 @@ White = 0xFFFFFF
 Conf = {
     ["Resolution"] = {80, 40},
     ["Port"] = 4, -- The port on which the communication will happen, please use the same in all devices that you want to communicate with this Client
-    ["Timeout"] = 10,
-    ["Timeoutcodepad"] = 10,
+    ["Timeout"] = 10, -- The time in seconds how long it takes after no touch to turn back to menu
+    ["Timeoutcodepad"] = 10, -- The time in seconds how long it takes after no touch to turn back to menu specific to Codepad
     ["yes"] = "Yes",
     ["no"] = "No",
     ["menu"] = {
@@ -73,7 +73,8 @@ Conf = {
             ["state"] = "An alarm was triggered!",
             -- {name, action, miny, minx, maxy, maxx, color, check}
             ["reset"] = {"Reset Alarm", "reset alarm", 12, 17, 15, 39, Green, "The Alarm was reset!"},
-            ["disable"] = {"Disable Alarm", "disable alarm", 12, 41, 15, 63, Green, "The alarm was disabled!"}
+            ["disable"] = {"Disable Alarm", "disable alarm", 12, 41, 15, 63, Green, "The alarm was disabled!"},
+            ["message"] = "The alarm was triggered!"
         },
         ["nottriggered"] = {
             ["state"] = "No alarm was triggered!"
