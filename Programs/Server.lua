@@ -244,6 +244,7 @@ function alarm.action(action, pass, modemuse)
                 rs.setBundledOutput(Conf.Alarm.Alarmresetside, Conf.Alarm.Alarmresetcolor, 255) os.sleep(1) rs.setBundledOutput(Conf.Alarm.Alarmresetside, Conf.Alarm.Alarmresetcolor, 0)
                 if rs.getBundledInput(Conf.Alarm.Alarmside, Conf.Alarm.Alarmcolor) == 0 then modem.send(Sender, Conf.Port, "correct", "alarm reset") write.log(Sender .. "       " .. Conf.Logmessages.Resetalarmmessage[1]) end
             end
+            modem.broadcast(Conf.Port, "alarm reset")
         else
             modem.send(Sender, Conf.Port, "wrong")
             write.log(Sender .. "       " .. Conf.Logmessages.Actionalarmwrongcodemessage[1])
@@ -253,17 +254,27 @@ end
 
 while true do
 
+    Eventtype = nil
     local program = nil
     Object = nil
     local action = nil
     local pass = nil
-
+    local side = nil
 
     conf.setlights()
     conf.setdoors()
 
     modem.open(Conf.Port)
-    _, _, Sender, _, _, program, Object, action, pass = event.pull("modem_message")
+    Eventtype, _, Sender, _, Strength, program, Object, action, pass = event.pullMultiple("modem_message", "redstone_changed")
+    local side, color  = Sender, program
+
+    if Eventtype == "redstone_changed" and Strength > 0 then
+        if side == Conf.Alarm.Alarmside and color == Conf.Alarm.Alarmcolor then
+            modem.broadcast(Conf.Port, "alarm triggered")
+            write.log(Conf.Logmessages.Alarmtriggeredmessage[1])
+        end
+        goto skip
+    end
 
     for _, data in pairs(lights) do
         if Object == data["room"] then
@@ -279,31 +290,26 @@ while true do
 
     if Logname == nil then Logname = "" end
 
-    if program == "check server" then modem.send(Sender, Conf.Port, "server ok") write.log(Sender .. "       " .. Conf.Logmessages.Checkedservermessage[1]) end
-
-    if program == "light" then
+    if program == "check server" then modem.send(Sender, Conf.Port, "server ok") write.log(Sender .. "       " .. Conf.Logmessages.Checkedservermessage[1])
+    elseif program == "light" then
         if action == nil and Object ~= "turn all off" then light.check(Object)
         elseif Object == "turn all off" then light.turnalloff()
         elseif action ~= nil and Object ~= "turn all off" then light.action(Object, action)
         end
-    end
-
-    if program == "door" then
+    elseif program == "door" then
         if action == nil and Object ~= "lock house" then door.check(Object)
         elseif Object == "lock house" then door.lockhouse(pass)
         else door.action(Object, action, pass)
         end
-    end
-
-    if program == "alarm" then
+    elseif program == "alarm" then
         if action == nil then alarm.check()
         else alarm.action(action, pass, true)
         end
-    end
-
-    if program == "code" then
+    elseif program == "code" then
         door.code(Object, pass)
     end
+
+    ::skip::
 
     sign.running(1, 1, 160, 5, Conf.Serverrunningmessage)
 

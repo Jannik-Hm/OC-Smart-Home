@@ -27,6 +27,7 @@ Conf = {
         ["Closedoormessage"] = {"closed the door"},
         ["Opengaragemessage"] = {"opened the garage door"},
         ["Closegaragemessage"] = {"closed the garage door"},
+        ["Alarmtriggeredmessage"] = {"The alarm was triggered!"},
         ["Disablealarmmessage"] = {"disabled the alarm"},
         ["Resetalarmmessage"] = {"reset the alarm"}
     },

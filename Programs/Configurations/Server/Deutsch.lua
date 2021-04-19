@@ -27,6 +27,7 @@ Conf = {
         ["Closedoormessage"] = {"hat die Tür", "geschlossen"},
         ["Opengaragemessage"] = {"hat das Garagentor geöffnet"},
         ["Closegaragemessage"] = {"hat das Garagentor geschlossen"},
+        ["Alarmtriggeredmessage"] = {"Der Alarm wurde ausgelöst!"},
         ["Disablealarmmessage"] = {"hat den Alarm deaktiviert"},
         ["Resetalarmmessage"] = {"hat den Alarm zurückgesetzt"}
     },
