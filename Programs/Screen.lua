@@ -344,7 +344,7 @@ function alarm.alarmmessage(addition)
     button.setTable("Ok", "alarmok", 14, Conf.Resolution[1]/2-5, 17, Conf.Resolution[1]/2+5, Green)
     ::getbutton::
     Touch("alarmmessage")
-    if (Eventtype == "touch" and Func == "alarmok") or (Eventtype == "modem_message" and Message "alarm reset") then
+    if (Eventtype == "touch" and Func == "alarmok") or (Eventtype == "modem_message" and Message == "alarm reset") then
         Timeout2 = true
         return
     else
