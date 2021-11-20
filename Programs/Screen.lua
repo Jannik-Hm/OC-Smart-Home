@@ -38,7 +38,7 @@ end
 function conf.setlights()
     Maxbuttony = 0
     button.draw(Conf.menu.lights.miny, Conf.menu.lights.minx, Conf.menu.lights.maxy, Conf.menu.lights.maxx, Conf.menu.lights.name, Red)
-    button.draw(2, 3, 7, 26, "Lichter", Red)
+    button.draw(2, 3, 7, 26, Conf.menu.lights.name, Red)
     for _, data in pairs(Conf.menu) do
         if data.func == "lights" then goto continue end
         button.setTable(data.name, data.func, data.miny, data.minx, data.maxy, data.maxx, data.color)
