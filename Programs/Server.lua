@@ -236,13 +236,15 @@ function alarm.action(action, pass, modemuse)
             modem.send(Sender, Conf.Port, "correct")
             if action == "disable alarm" then
                 rs.setBundledOutput(Conf.Alarm.Alarmenableside, Conf.Alarm.Alarmenablecolor, 0) rs.setBundledOutput(Conf.Alarm.Alarmresetside, Conf.Alarm.Alarmresetcolor, 255)
-                if rs.getBundledInput(Conf.Alarm.Alarmside, Conf.Alarm.Alarmcolor) == 0 and rs.getBundledOutput(Conf.Alarm.Alarmresetside, Conf.Alarm.Alarmresetcolor) == 255 and rs.getBundledOutput(Conf.Alarm.Alarmenableside, Conf.Alarm.Alarmenablecolor) == 0 then 
+                if rs.getBundledInput(Conf.Alarm.Alarmside, Conf.Alarm.Alarmcolor) == 0 and rs.getBundledOutput(Conf.Alarm.Alarmresetside, Conf.Alarm.Alarmresetcolor) == 255 and rs.getBundledOutput(Conf.Alarm.Alarmenableside, Conf.Alarm.Alarmenablecolor) == 0 then
                     if modemuse then modem.send(Sender, Conf.Port, "correct", "alarm disabled") write.log(Sender .. "       " .. Conf.Logmessages.Disablealarmmessage[1]) end
                 end
             end
             if action == "reset alarm" then
                 rs.setBundledOutput(Conf.Alarm.Alarmresetside, Conf.Alarm.Alarmresetcolor, 255) os.sleep(1) rs.setBundledOutput(Conf.Alarm.Alarmresetside, Conf.Alarm.Alarmresetcolor, 0)
-                if rs.getBundledInput(Conf.Alarm.Alarmside, Conf.Alarm.Alarmcolor) == 0 then modem.send(Sender, Conf.Port, "correct", "alarm reset") write.log(Sender .. "       " .. Conf.Logmessages.Resetalarmmessage[1]) end
+                if rs.getBundledInput(Conf.Alarm.Alarmside, Conf.Alarm.Alarmcolor) == 0 then 
+                    modem.send(Sender, Conf.Port, "correct", "alarm reset") write.log(Sender .. "       " .. Conf.Logmessages.Resetalarmmessage[1])
+                end
             end
             modem.broadcast(Conf.Port, "alarm reset")
         else
